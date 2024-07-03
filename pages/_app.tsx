@@ -6,7 +6,6 @@ import type { NextPage } from "next";
 import type { AppProps } from "next/app";
 import { type ReactElement, type ReactNode } from "react";
 
-import "../styles/base.css";
 import "../styles/vars.css";
 import "../styles/global.css";
 
