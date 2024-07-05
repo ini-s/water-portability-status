@@ -1,23 +1,31 @@
 import { FC, ReactNode } from "react";
 import Head from "next/head";
 
+import Header from "../components/header/Header";
+
 interface IGeneralLayoutProps {
   children: ReactNode;
-  removeNav?: boolean;
+  exportData?: boolean;
   pageTitle: string;
 }
 
-const GeneralLayout: FC<IGeneralLayoutProps> = ({ children, pageTitle }) => {
+const GeneralLayout: FC<IGeneralLayoutProps> = ({
+  children,
+  exportData,
+  pageTitle,
+}) => {
   return (
     <>
       <Head>
         <title>{`Water Probability Status | ${pageTitle}`}</title>
-        <link
+        {/* <link
           rel="shortcut icon"
-          href="/gate-academy.png"
-          type="image/x-icon"
-        />
+          href=""
+          type=""
+        /> */}
       </Head>
+
+      <Header exportData={exportData} />
 
       <main>{children}</main>
     </>
