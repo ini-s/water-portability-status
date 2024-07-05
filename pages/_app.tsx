@@ -16,7 +16,9 @@ export type NextPageWithLayout<P = unknown, IP = P> = NextPage<P, IP> & {
 type AppPropsWithLayout = AppProps & { Component: NextPageWithLayout };
 
 const queryClient = new QueryClient();
+
 function MyApp({ Component, pageProps }: AppPropsWithLayout): ReactElement {
+  const getLayout = Component.getLayout ?? ((page) => page);
   return (
     <>
       <Head>
@@ -24,7 +26,7 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout): ReactElement {
       </Head>
 
       <QueryClientProvider client={queryClient}>
-        <Component {...pageProps} />
+        {getLayout(<Component {...pageProps} />)}
 
         <ReactQueryDevtools />
       </QueryClientProvider>
