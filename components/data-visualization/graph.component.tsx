@@ -59,7 +59,7 @@ const Graph = ({
   const label = data?.data.labels;
   const values = data?.data.actualValues;
 
-  //   console.log("data:", label);
+    // console.log("data:", label);
 
   return (
     <GraphContainer>

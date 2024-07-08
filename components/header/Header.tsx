@@ -19,10 +19,17 @@ const Header = ({ exportData }: IHeaderProps) => {
        <Navbar>
         <div>
           <h3>{
-              asPath === '/iwaya' && ('iwaya')
+            asPath === '/iwaya' && ('iwaya')
           }</h3>
           <h3>{
-              asPath === '/bariga' && ('bariga')
+            asPath === '/bariga' && ('bariga')
+          }</h3>
+          <h3>{
+            asPath === "/iwaya" || asPath === "/iwaya/data-visualization" &&("Iwaya")
+          }</h3>
+
+          <h3>{
+            asPath === "/bariga" || asPath === "/bariga/data-visualization" &&("Bariga")
           }</h3>
             <h5>water status</h5>
         </div>
