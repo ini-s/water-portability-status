@@ -1,21 +1,21 @@
 import Link from "next/link";
 
-import { ButtonsContainer, HomePageContainer } from "../styles/homepage.styles";
+import { ButtonsContainer, HomePageContainer, Button } from "../styles/homepage.styles";
 
 import routes from "../lib/routes";
 
 const Homepage = () => {
   return (
     <HomePageContainer>
-      <h1>water probability status</h1>
+      <h1>water potability status</h1>
       <h2>select location</h2>
 
       <ButtonsContainer>
         <Link href={routes.location("iwaya")}>
-          <button>Iwaya</button>
+          <Button> Iwaya </Button>
         </Link>
         <Link href={routes.location("bariga")}>
-          <button>Bariga</button>
+          <Button>Bariga</Button>
         </Link>
       </ButtonsContainer>
     </HomePageContainer>

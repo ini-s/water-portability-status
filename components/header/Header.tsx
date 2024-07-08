@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaBell } from 'react-icons/fa';
 
-import { HeaderWrapper, Logo } from "../../styles/header.styles";
+import { HeaderWrapper, Logo, Button } from "../../styles/header.styles";
 
 import routes from "../../lib/routes";
-
 interface IHeaderProps {
   exportData?: boolean;
 }
@@ -12,19 +12,27 @@ interface IHeaderProps {
 const Header = ({ exportData }: IHeaderProps) => {
   return (
     <HeaderWrapper>
-      {/* <Logo>
-        <Image src="" alt="logo" fill sizes="100%" />
-      </Logo> */}
+      {<Logo>
+        <div>
+          <Image 
+            src="/locationpin.png" 
+            alt="logo" 
+            fill sizes="100%" 
+          />
+        </div>
+      </Logo>}
       <ul>
-        <li></li>
-        <li>Home</li>
+        <li><FaBell/></li>
+        <Link href="/" passHref>
+          <li>Home</li>
+        </Link>
         <li>
           {!exportData ? (
             <Link href={routes.dataVisualization("bariga")} passHref>
-              <button>Data Visualization</button>
+              <Button>Data Visualization</Button>
             </Link>
           ) : (
-            <button> export data</button>
+            <Button> export data</Button>
           )}
         </li>
       </ul>
