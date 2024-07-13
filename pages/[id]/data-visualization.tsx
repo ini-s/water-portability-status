@@ -61,6 +61,7 @@ const DataVisualizationPage: NextPageWithLayout = () => {
 
   return (
     <DataVisualizationContainer>
+      
       <CategorySelectionButtons>
         <button 
           style={getButtonStyle(isActive === "physical")} 
