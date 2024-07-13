@@ -1,4 +1,6 @@
-export const categoriesData = [
+import { ICategory } from "../types/data-types";
+
+export const categoriesData: ICategory[] = [
   {
     category: "physical",
     properties: [
@@ -46,7 +48,7 @@ export const categoriesData = [
         name: "",
         data: {
           subtitle: "",
-          labels: "",
+          labels: ["25/11/05", "24/11/02", "23/11/01"],
           actualValues: [20, 25.5, 24, 26.6, 21],
           xLabel: "",
           yLabel: "",
