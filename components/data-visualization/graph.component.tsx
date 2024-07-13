@@ -63,6 +63,7 @@ const Graph = ({
 
   return (
     <GraphContainer>
+      
       <Line
         data={{
           labels: label as string[],
@@ -70,40 +71,47 @@ const Graph = ({
             {
               label: data?.data.subtitle,
               data: values,
+              borderColor: 'rgba(0, 153, 255, 0.5',
+              borderWidth: 2,
+              fill: true,
             },
           ],
         }}
         options={{
           responsive: true,
           plugins: {
-            title: {
-              text: propertyName,
-              display: true,
-            },
             subtitle: {
               display: true,
               text: data?.data.subtitle,
             },
             legend: {
-              display: true,
-              labels: {
-                boxHeight: 0,
-                usePointStyle: true,
-              },
+               display: false,
+               
             },
           },
+          
+          
           scales: {
             x: {
               title: {
                 display: true,
                 text: data?.data.xLabel,
+
+                font:{
+                  size: 12,
+                }
               },
             },
             y: {
               title: {
                 display: true,
                 text: data?.data.yLabel,
+
+                font:{
+                  size: 12,
+                }
               },
+             
               ticks: {
                 stepSize: 1,
               },
@@ -128,3 +136,5 @@ ChartJS.register(
 );
 
 export default Graph;
+
+
