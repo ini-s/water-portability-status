@@ -15,10 +15,6 @@ const Pagination = ({
   const noOfPages = Math.ceil(size / postsPerPage);
   const [pageRange, setPageRange] = useState<number[]>([]);
 
-  useEffect(() => {
-    updatePageRange(currentPage);
-  }, [currentPage, noOfPages]);
-
   const updatePageRange = (newPage: number) => {
     let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
     let endPage = Math.min(startPage + 2, noOfPages);
@@ -46,6 +42,10 @@ const Pagination = ({
     }
   };
 
+  useEffect(() => {
+    updatePageRange(currentPage);
+  }, [currentPage, updatePageRange, noOfPages]);
+
   return (
     <PaginationBox>
       <ul>
@@ -58,7 +58,7 @@ const Pagination = ({
         ))}
         <li>1-{noOfPages}</li>
         <li onClick={handleNext}>N</li>
-          {/* <li></li>  when clicked, setCurrentPage(noOfPages) */}
+        {/* <li></li>  when clicked, setCurrentPage(noOfPages) */}
       </ul>
     </PaginationBox>
   );

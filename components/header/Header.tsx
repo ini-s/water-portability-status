@@ -43,7 +43,7 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
         {!removeBtn && (
           <li>
             {!exportData ? (
-              <Link href={routes.dataVisualization()} passHref>
+              <Link href={routes.dataVisualization('iwaya')} passHref>
                 <button>Data Visualization</button>
               </Link>
             ) : (

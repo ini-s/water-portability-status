@@ -28,6 +28,7 @@ const DataVisualizationPage: NextPageWithLayout = () => {
 
   return (
     <DataVisualizationContainer>
+      
       <CategorySelectionButtons>
         <button onClick={() => handleActiveState("physical")}>Physical</button>
         <button onClick={() => handleActiveState("chemical")}>Chemical</button>
