@@ -8,6 +8,9 @@ import {
   Logo,
   Button,
   Navbar,
+  LogoContainer,
+  Navlink,
+  NotificationButton,
 } from "../../styles/header.styles";
 
 import routes from "../../lib/routes";
@@ -25,8 +28,7 @@ interface IHeaderProps {
 
 const Header = ({ exportData, removeBtn }: IHeaderProps) => {
   const router = useRouter();
-  const { query } = router;
-  const { asPath } = router;
+  const { query, asPath } = router;
   const queryLocation = getLocationFromQuery(query.location);
 
   const goToNotifications = () => {
@@ -35,56 +37,69 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
       query: { ...query, location: queryLocation },
     });
   };
+  console.log(query.location);
   return (
     <HeaderWrapper>
       <Navbar>
-        <div>
-          <h3>{asPath === "/iwaya" && "iwaya"}</h3>
-          <h3>{asPath === "/bariga" && "bariga"}</h3>
-          <h3>
-            {asPath === "/iwaya" ||
-              (asPath === "/iwaya/data-visualization" && "Iwaya")}
+        <LogoContainer>
+        <h3 suppressHydrationWarning>
+            {asPath === "/water-quality-data?location=iwaya" && "iwaya"}
+            {asPath === "/iwaya/data-visualization" && "iwaya"}
+            {asPath === "/notifications?location=iwaya" && "iwaya"}
           </h3>
-
-          <h3>
-            {asPath === "/bariga" ||
-              (asPath === "/bariga/data-visualization" && "Bariga")}
+          
+          <h3 suppressHydrationWarning>
+            {asPath === "/water-quality-data?location=bariga" && "bariga"}
+            {asPath === "/bariga/data-visualization" && "bariga"}
+            {asPath === "/notifications?location=bariga" && "bariga"}
           </h3>
-          <h5>water status</h5>
-        </div>
-        {
-          <Logo>
-            <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
-          </Logo>
-        }
+          {
+            <Logo>
+              <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
+            </Logo>
+          }
+        </LogoContainer>
+        <h5>water status</h5>
       </Navbar>
-      <ul>
-        <Link href="/" passHref>
+      <Navlink>
+        <ul>
           <li>
-            <FaBell />
+            <NotificationButton>
+              <button onClick={goToNotifications}>
+                {" "}
+                <FaBell />
+              </button>
+            </NotificationButton>
           </li>
-        </Link>
-        <Link href="/" passHref>
-          <li>Home</li>
-        </Link>
-        <li>
-          <button onClick={goToNotifications}>Notifications</button>
-        </li>
-        {!removeBtn && (
           <li>
-            {!exportData ? (
-              <Link href={routes.dataVisualization("iwaya")} passHref>
-                <button>Data Visualization</button>
-              </Link>
-            ) : (
-              <ExportData
-                data={categoriesData}
-                fileName="water-probability-status"
-              />
-            )}
+            <Link href="/" passHref>
+              Home
+            </Link>
           </li>
-        )}
-      </ul>
+          {!removeBtn && (
+            <li>
+              {!exportData ? (
+                <>
+                  {asPath === "/water-quality-data?location=iwaya" ? (
+                    <Link href={routes.dataVisualization("iwaya")} passHref>
+                      <Button>Data Visualization</Button>
+                    </Link>
+                  ) : (
+                    <Link href={routes.dataVisualization("bariga")} passHref>
+                      <Button>Data Visualization</Button>
+                    </Link>
+                  )}
+                </>
+              ) : (
+                <ExportData
+                  data={categoriesData}
+                  fileName="water-probability-status"
+                />
+              )}
+            </li>
+          )}
+        </ul>
+      </Navlink>
     </HeaderWrapper>
   );
 };
