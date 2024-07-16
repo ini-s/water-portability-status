@@ -6,6 +6,8 @@ interface IExportData {
   fileName: string;
 }
 
+import {Button} from "../../styles/header.styles"
+
 const ExportData: React.FC<IExportData> = ({ data, fileName }) => {
   const handleDownload = () => {
     if (data.length === 0) return;
@@ -32,7 +34,7 @@ const ExportData: React.FC<IExportData> = ({ data, fileName }) => {
     document.body.removeChild(link);
   };
 
-  return <button onClick={handleDownload}>export data</button>;
+  return <Button onClick={handleDownload}>export data</Button>;
 };
 
 export default ExportData;
