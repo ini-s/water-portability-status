@@ -14,7 +14,7 @@ import {
 
 import { GraphContainer } from "../../styles/graph.styles";
 
-import { categoriesData } from "../../data/categories";
+import { IPredictionLogs, PropertyData } from "../../types/data-types";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -23,54 +23,51 @@ defaults.responsive = true;
 // defaults.plugins.title.font= {size: 20};
 // defaults.plugins.title.color = "blue";
 
-interface PropertyData {
-  title: string;
-  labels: string[];
-  values: number[];
-  actualValues?: number[]; // Optional property
-  xLabel: string;
-  yLabel: string;
-}
-
-interface IProperty {
-  name: string;
+interface GraphProps {
+  propertyName: string;
   data: PropertyData;
-}
-
-interface ICategory {
-  category: string;
-  properties: IProperty[];
+  showSoftSensor: boolean;
+  predictionLogs: IPredictionLogs[];
 }
 
 const Graph = ({
-  categoryName,
   propertyName,
-}: {
-  categoryName: string;
-  propertyName: string;
-}) => {
-  const category = categoriesData?.find(
-    (category) => category.category === categoryName
-  );
-  const data = category?.properties.find(
-    (property) => property.name === propertyName
-  );
+  data,
+  showSoftSensor,
+  predictionLogs,
+}: GraphProps) => {
+  console.log(predictionLogs);
+  console.log(data.values);
 
-  const label = data?.data.labels;
-  const values = data?.data.actualValues;
-
-  //   console.log("data:", label);
+  const predictionValues = predictionLogs.map((item) => {
+    switch (propertyName) {
+      case "temperature":
+        return item.temperature;
+      case "ph":
+        return item.ph;
+      default:
+        return null;
+    }
+  });
 
   return (
     <GraphContainer>
       <Line
         data={{
-          labels: label as string[],
+          labels: data.labels,
           datasets: [
             {
-              label: data?.data.subtitle,
-              data: values,
+              label: data.subtitle,
+              data: data.values,
             },
+            ...(showSoftSensor
+              ? [
+                  {
+                    label: propertyName,
+                    data: predictionValues,
+                  },
+                ]
+              : []),
           ],
         }}
         options={{
@@ -82,7 +79,7 @@ const Graph = ({
             },
             subtitle: {
               display: true,
-              text: data?.data.subtitle,
+              text: data.subtitle,
             },
             legend: {
               display: true,
@@ -96,19 +93,19 @@ const Graph = ({
             x: {
               title: {
                 display: true,
-                text: data?.data.xLabel,
+                text: data.xLabel,
               },
             },
             y: {
               title: {
                 display: true,
-                text: data?.data.yLabel,
+                text: data.yLabel,
               },
               ticks: {
                 stepSize: 1,
               },
-              min: 23,
-              max: 29,
+              min: data.min,
+              max: data.max,
             },
           },
         }}
