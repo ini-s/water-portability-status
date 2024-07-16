@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useState,
+  useEffect,
+  useCallback,
+} from "react";
+
 import { PaginationBox } from "../../styles/notifications.styles";
 
 const Pagination = ({
@@ -15,13 +22,16 @@ const Pagination = ({
   const noOfPages = Math.ceil(size / postsPerPage);
   const [pageRange, setPageRange] = useState<number[]>([]);
 
-  const updatePageRange = (newPage: number) => {
-    let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
-    let endPage = Math.min(startPage + 2, noOfPages);
-    setPageRange(
-      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
-    );
-  };
+  const updatePageRange = useCallback(
+    (newPage: number) => {
+      let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
+      let endPage = Math.min(startPage + 2, noOfPages);
+      setPageRange(
+        Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
+      );
+    },
+    [noOfPages]
+  );
 
   const handlePageChange = (no: number) => {
     setCurrentPage(no);
