@@ -4,11 +4,9 @@ import { useRouter } from "next/router";
 
 import { HeaderWrapper, Logo } from "../../styles/header.styles";
 
-import routes from "../../lib/routes";
-
 import ExportData from "../export-data/export-data";
 
-import { categoriesData } from "../../data/categories";
+// import { categoriesData } from "../../data/categories";
 
 import { getLocationFromQuery } from "../../server-store/queries/queries";
 
@@ -23,12 +21,20 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
 
   const queryLocation = getLocationFromQuery(query.location);
 
+  const showDataVisualization = () => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...query, dataVisualization: true },
+    });
+  };
+
   const goToNotifications = () => {
     router.push({
       pathname: "notifications",
-      query: {...query, location: queryLocation },
+      query: { ...query, location: queryLocation },
     });
   };
+
   return (
     <HeaderWrapper>
       {/* <Logo>
@@ -43,12 +49,12 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
         {!removeBtn && (
           <li>
             {!exportData ? (
-              <Link href={routes.dataVisualization('iwaya')} passHref>
-                <button>Data Visualization</button>
-              </Link>
+              <button onClick={showDataVisualization}>
+                Data Visualization
+              </button>
             ) : (
               <ExportData
-                data={categoriesData}
+                // data={categoriesData}
                 fileName="water-probability-status"
               />
             )}
