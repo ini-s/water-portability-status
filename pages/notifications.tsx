@@ -93,7 +93,7 @@ const NotificationsPage: NextPageWithLayout = () => {
 
   return (
     <NotificationsContainer>
-      <h1>Notifications</h1>
+      <h1>Notification</h1>
       <FilterBox>
         <input
           type="date"
@@ -121,6 +121,9 @@ const NotificationsPage: NextPageWithLayout = () => {
           </tr>
         </thead>
         <tbody>
+          {/* 
+          isFetching || isInitialLoading ? <Spinner></Spinner>:
+          */}
           {notifications?.length > 0 &&
             notifications.map((el, index) => (
               <tr key={index}>
