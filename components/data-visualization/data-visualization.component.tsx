@@ -1,6 +1,8 @@
 
 const DataVisualization = () => {
-  return <></>;
+  return <>
+    
+  </>;
 };
 
 export default DataVisualization;
