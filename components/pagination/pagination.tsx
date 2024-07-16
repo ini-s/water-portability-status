@@ -1,7 +1,12 @@
-import { Dispatch, SetStateAction, useState, useEffect } from "react";
+import { Dispatch, SetStateAction, useState, useEffect, useCallback } from "react";
 import { PaginationBox } from "../../styles/notifications.styles";
 
-import { FaAngleDoubleLeft, FaAngleLeft, FaAngleDoubleRight, FaAngleRight } from 'react-icons/fa'
+import {
+  FaAngleDoubleLeft,
+  FaAngleLeft,
+  FaAngleDoubleRight,
+  FaAngleRight,
+} from "react-icons/fa";
 
 const Pagination = ({
   size,
@@ -17,14 +22,16 @@ const Pagination = ({
   const noOfPages = Math.ceil(size / postsPerPage);
   const [pageRange, setPageRange] = useState<number[]>([]);
 
-  const updatePageRange = (newPage: number) => {
-    let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
-    let endPage = Math.min(startPage + 2, noOfPages);
-    setPageRange(
-      Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
-    );
-  };
-
+  const updatePageRange = useCallback(
+    (newPage: number) => {
+      let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
+      let endPage = Math.min(startPage + 2, noOfPages);
+      setPageRange(
+        Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i)
+      );
+    },
+    [noOfPages]
+  );
   const handlePageChange = (no: number) => {
     setCurrentPage(no);
     updatePageRange(no);
@@ -51,16 +58,28 @@ const Pagination = ({
   return (
     <PaginationBox>
       <ul>
-         { <li><FaAngleDoubleLeft/></li>  /*when clicked, setCurrentPage(1) */}
-        <li onClick={handlePrevious}><FaAngleLeft/></li>
+        {
+          <li>
+            <FaAngleDoubleLeft />
+          </li> /*when clicked, setCurrentPage(1) */
+        }
+        <li onClick={handlePrevious}>
+          <FaAngleLeft />
+        </li>
         {pageRange.map((no) => (
           <li key={no} onClick={() => handlePageChange(no)}>
             {no}
           </li>
         ))}
         <li>1-{noOfPages}</li>
-        <li onClick={handleNext}><FaAngleRight/></li>
-        {<li><FaAngleDoubleRight/></li> /* when clicked, setCurrentPage(noOfPages) */}
+        <li onClick={handleNext}>
+          <FaAngleRight />
+        </li>
+        {
+          <li>
+            <FaAngleDoubleRight />
+          </li> /* when clicked, setCurrentPage(noOfPages) */
+        }
       </ul>
     </PaginationBox>
   );
