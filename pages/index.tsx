@@ -1,9 +1,9 @@
 import { useRouter } from "next/router";
 
 import {
+  Button,
   ButtonsContainer,
   HomePageContainer,
-  Button,
 } from "../styles/homepage.styles";
 
 const Homepage = () => {

@@ -1,4 +1,11 @@
-import { Dispatch, SetStateAction, useState, useEffect, useCallback } from "react";
+import {
+  Dispatch,
+  SetStateAction,
+  useCallback,
+  useEffect,
+  useState,
+} from "react";
+
 import { PaginationBox } from "../../styles/notifications.styles";
 
 import {
@@ -32,6 +39,7 @@ const Pagination = ({
     },
     [noOfPages]
   );
+
   const handlePageChange = (no: number) => {
     setCurrentPage(no);
     updatePageRange(no);

@@ -1,4 +1,3 @@
-import axios from "axios";
 import { useQuery } from "@tanstack/react-query";
 
 import { api } from "../utils";
@@ -33,8 +32,6 @@ const getNotifications = async ({
   }
 
   const response = await api.get("/notifications", { params });
-
-  // console.log(response.data.data)
 
   return response.data.data;
 };

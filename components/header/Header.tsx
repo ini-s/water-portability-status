@@ -13,11 +13,9 @@ import {
   NotificationButton,
 } from "../../styles/header.styles";
 
-import routes from "../../lib/routes";
-
 import ExportData from "../export-data/export-data";
 
-import { categoriesData } from "../../data/categories";
+// import { categoriesData } from "../../data/categories";
 
 import { getLocationFromQuery } from "../../server-store/queries/queries";
 
@@ -31,23 +29,29 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
   const { query, asPath } = router;
   const queryLocation = getLocationFromQuery(query.location);
 
+  const showDataVisualization = () => {
+    router.push({
+      pathname: router.pathname,
+      query: { ...query, dataVisualization: true },
+    });
+  };
+
   const goToNotifications = () => {
     router.push({
       pathname: "notifications",
       query: { ...query, location: queryLocation },
     });
   };
-  console.log(query.location);
   return (
     <HeaderWrapper>
       <Navbar>
         <LogoContainer>
-        <h3 suppressHydrationWarning>
+          <h3 suppressHydrationWarning>
             {asPath === "/water-quality-data?location=iwaya" && "iwaya"}
             {asPath === "/iwaya/data-visualization" && "iwaya"}
             {asPath === "/notifications?location=iwaya" && "iwaya"}
           </h3>
-          
+
           <h3 suppressHydrationWarning>
             {asPath === "/water-quality-data?location=bariga" && "bariga"}
             {asPath === "/bariga/data-visualization" && "bariga"}
@@ -70,34 +74,22 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
                 <FaBell />
               </button>
             </NotificationButton>
-          </li>
-          <li>
-            <Link href="/" passHref>
-              Home
-            </Link>
-          </li>
-          {!removeBtn && (
             <li>
-              {!exportData ? (
-                <>
-                  {asPath === "/water-quality-data?location=iwaya" ? (
-                    <Link href={routes.dataVisualization("iwaya")} passHref>
-                      <Button>Data Visualization</Button>
-                    </Link>
-                  ) : (
-                    <Link href={routes.dataVisualization("bariga")} passHref>
-                      <Button>Data Visualization</Button>
-                    </Link>
-                  )}
-                </>
-              ) : (
-                <ExportData
-                  data={categoriesData}
-                  fileName="water-probability-status"
-                />
-              )}
+              <Link href="/" passHref>
+                Home
+              </Link>
             </li>
-          )}
+            {!exportData ? (
+              <button onClick={showDataVisualization}>
+                Data Visualization
+              </button>
+            ) : (
+              <ExportData
+                // data={categoriesData}
+                fileName="water-probability-status"
+              />
+            )}
+          </li>
         </ul>
       </Navlink>
     </HeaderWrapper>

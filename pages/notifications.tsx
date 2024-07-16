@@ -56,10 +56,6 @@ const NotificationsPage: NextPageWithLayout = () => {
 
   const notifications: INotifications[] = data?.notifications;
 
-  const startingIndex = currentPage * size - size;
-
-  // const size = notificationsData.length;
-
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
     const { value, name } = e.target;
     setDateRange((prev) => ({ ...prev, [name]: value }));
