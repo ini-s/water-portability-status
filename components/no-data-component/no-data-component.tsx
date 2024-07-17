@@ -10,9 +10,9 @@ const NoDataWrapper = styled.div`
 `;
 
 const Circle = styled.div`
-  width: 370px;
-  height: 370px;
-  border: 20px solid rgb(var(--color-light-grey));
+  width: 23.125rem;
+  height: 23.125rem;
+  border: 1.25rem solid rgb(var(--color-light-grey));
   border-radius: 50%;
   display: flex;
   align-items: center;
