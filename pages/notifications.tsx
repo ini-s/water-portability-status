@@ -13,6 +13,8 @@ import {
 } from "../styles/notifications.styles";
 
 import Pagination from "../components/pagination/pagination";
+import Spinner from "../components/spinner-component/spinner-component";
+import NoDataComponent from "../components/no-data-component/no-data-component";
 
 import useGetNotifications from "../server-store/queries/useGetNotifications";
 import {
@@ -86,7 +88,9 @@ const NotificationsPage: NextPageWithLayout = () => {
 
     setDateRange({ startDate: "", endDate: "" });
   };
-
+  if (isFetching || isInitialLoading) {
+    return <Spinner />;
+  }
   return (
     <NotificationsContainer>
       <h1>Notification</h1>
@@ -109,33 +113,35 @@ const NotificationsPage: NextPageWithLayout = () => {
         <button onClick={filterByDateRange}>filter by date range</button>
         <button onClick={clearFilters}>clear filters</button>
       </FilterBox>
-      <Table>
-        <thead>
-          <tr>
-            <th>date & time</th>
-            <th>event description</th>
-          </tr>
-        </thead>
-        <tbody>
-          {/* 
-          isFetching || isInitialLoading ? <Spinner></Spinner>:
-          */}
-          {notifications?.length > 0 &&
-            notifications.map((el, index) => (
-              <tr key={index}>
-                <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
-                <td>{el.message}</td>
+      {notifications?.length > 0 ? (
+        <>
+          <Table>
+            <thead>
+              <tr>
+                <th>date & time</th>
+                <th>event description</th>
               </tr>
-            ))}
-        </tbody>
-      </Table>
-
-      <Pagination
-        size={data?.total_count ?? 0}
-        postsPerPage={size}
-        currentPage={currentPage}
-        setCurrentPage={setCurrentPage}
-      />
+            </thead>
+            <tbody>
+              {notifications?.length > 0 &&
+                notifications.map((el, index) => (
+                  <tr key={index}>
+                    <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
+                    <td>{el.message}</td>
+                  </tr>
+                ))}
+            </tbody>
+          </Table>
+          <Pagination
+            size={data?.total_count ?? 0}
+            postsPerPage={size}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
+        </>
+      ) : (
+        <NoDataComponent />
+      )}
     </NotificationsContainer>
   );
 };
