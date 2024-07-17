@@ -42,21 +42,18 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
       query: { ...query, location: queryLocation },
     });
   };
+
+  let locationText = "";
+  if (asPath.includes("location=iwaya")) {
+    locationText = "iwaya";
+  } else if (asPath.includes("location=bariga")) {
+    locationText = "bariga";
+  }
   return (
     <HeaderWrapper>
       <Navbar>
         <LogoContainer>
-          <h3 suppressHydrationWarning>
-            {asPath === "/water-quality-data?location=iwaya" && "iwaya"}
-            {asPath === "/iwaya/data-visualization" && "iwaya"}
-            {asPath === "/notifications?location=iwaya" && "iwaya"}
-          </h3>
-
-          <h3 suppressHydrationWarning>
-            {asPath === "/water-quality-data?location=bariga" && "bariga"}
-            {asPath === "/bariga/data-visualization" && "bariga"}
-            {asPath === "/notifications?location=bariga" && "bariga"}
-          </h3>
+        <h3 suppressHydrationWarning>{locationText}</h3>
           {
             <Logo>
               <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
@@ -80,9 +77,9 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
               </Link>
             </li>
             {!exportData ? (
-              <button onClick={showDataVisualization}>
+              <Button onClick={showDataVisualization}>
                 Data Visualization
-              </button>
+              </Button>
             ) : (
               <ExportData
                 // data={categoriesData}
