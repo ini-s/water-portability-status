@@ -59,6 +59,18 @@ export default class MyDocument extends Document {
             as="font"
             crossOrigin=""
           />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap"
+            rel="stylesheet"
+            as="font"
+          />
 
           {/* Favicons */}
 
