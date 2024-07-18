@@ -18,6 +18,7 @@ const Homepage = () => {
           <button>Bariga</button>
         </Link>
       </ButtonsContainer>
+      
     </HomePageContainer>
   );
 };
