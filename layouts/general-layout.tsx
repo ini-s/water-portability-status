@@ -6,12 +6,14 @@ import Header from "../components/header/Header";
 interface IGeneralLayoutProps {
   children: ReactNode;
   exportData?: boolean;
+  removeBtn?: boolean;
   pageTitle: string;
 }
 
 const GeneralLayout: FC<IGeneralLayoutProps> = ({
   children,
   exportData,
+  removeBtn,
   pageTitle,
 }) => {
   return (
@@ -25,7 +27,7 @@ const GeneralLayout: FC<IGeneralLayoutProps> = ({
         /> */}
       </Head>
 
-      <Header exportData={exportData} />
+      <Header exportData={exportData} removeBtn={removeBtn} />
 
       <main>{children}</main>
     </>

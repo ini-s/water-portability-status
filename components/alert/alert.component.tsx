@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import { AlertContainer } from "../../styles/alert.styles";
 
 const Alert = () => {
-  const [isUnsafe, setIsUnsafe] = useState(true)
+  const [isUnsafe, setIsUnsafe] = useState(true);
   return (
     <AlertContainer>
       <p>Report at 21/06/2024 09:00</p>
@@ -36,8 +36,6 @@ const Alert = () => {
             Salinity is within acceptable range
             <br />
             Electrical Conductivity is within acceptable range
-            
-         
           </>
         )}
       </p>

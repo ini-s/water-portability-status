@@ -1,4 +1,7 @@
 :root {
   --color-white: 255, 255, 255;
   --color-black: 0, 0, 0;
+  --color-light-grey: 217, 217, 217, 1;
+  --color-light-blue: 169, 250, 255;
+  --color-sky-blue: 208, 249, 252;
 }
