@@ -1,19 +1,27 @@
 import { NextPageWithLayout } from "./_app";
-
 import GeneralLayout from "../layouts/general-layout";
-
 import SafetyScreen from "../components/safety-screen/safety-screen.component";
 import WaterParameters from "../components/water-parameters/water-parameters.component";
-import { AlertContainer } from "../styles/alert.styles";
+import Alert from "../components/alert/alert.component";
+
+import {
+  PageContainer,
+  WaterParametersContainer,
+  AlertContainer,
+} from "../styles/id.styles";
 
 const LocationPage: NextPageWithLayout = () => {
   return (
     <div>
-      <SafetyScreen></SafetyScreen>
-      <div>
-        <WaterParameters />
-        <AlertContainer />
-      </div>
+      <SafetyScreen />
+      <PageContainer>
+        <AlertContainer>
+          <Alert />
+        </AlertContainer>
+        <WaterParametersContainer>
+          <WaterParameters />
+        </WaterParametersContainer>
+      </PageContainer>
     </div>
   );
 };
