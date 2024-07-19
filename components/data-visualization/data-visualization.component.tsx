@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { useEffect, useState } from "react";
 
-import WaterParameters from "../water-parameters/water-parameters.component";
 import Graph from "./graph.component";
-import Alert from "../alert/alert.component";
 
 import {
   CategorySelectionButtons,
@@ -114,12 +112,14 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
       <CategorySelectionButtons>
         <button
           style={getButtonStyle(isActive === "physical")}
-          onClick={() => handleActiveState("physical")}>
+          onClick={() => handleActiveState("physical")}
+        >
           Physical
         </button>
         <button
           style={getButtonStyle(isActive === "chemical")}
-          onClick={() => handleActiveState("chemical")}>
+          onClick={() => handleActiveState("chemical")}
+        >
           Chemical
         </button>
       </CategorySelectionButtons>
@@ -130,7 +130,8 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
           <>
             <button
               style={getButtonStyle(isActiveProperty === "temperature")}
-              onClick={() => handlePropertyState("temperature", "temperature")}>
+              onClick={() => handlePropertyState("temperature", "temperature")}
+            >
               Temperature
             </button>
             <button
@@ -142,12 +143,14 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
                   "total_dissolved_solids",
                   "total dissolved solids"
                 )
-              }>
+              }
+            >
               Total Dissolved
             </button>
             <button
               style={getButtonStyle(isActiveProperty === "salinity")}
-              onClick={() => handlePropertyState("salinity", "salinity")}>
+              onClick={() => handlePropertyState("salinity", "salinity")}
+            >
               Salinity
             </button>
             <button
@@ -159,12 +162,16 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
                   "electrical_conductivity",
                   "electrical conductivity"
                 )
-              }>
+              }
+            >
               Electrical Conductivity
             </button>
             <button
               style={getButtonStyle(isActiveProperty === "specific_gravity")}
-              onClick={() => handlePropertyState("specific_gravity", "specific gravity")}>
+              onClick={() =>
+                handlePropertyState("specific_gravity", "specific gravity")
+              }
+            >
               Specific Gravity
             </button>
           </>
@@ -173,7 +180,8 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
           <>
             <button
               style={getButtonStyle(isActiveProperty === "ph")}
-              onClick={() => handlePropertyState("ph", "PH")}>
+              onClick={() => handlePropertyState("ph", "PH")}
+            >
               pH
             </button>
           </>
@@ -196,11 +204,6 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
             : "view soft sensor"}
         </button>
       )}
-
-      <div>
-        <WaterParameters />
-        <Alert />
-      </div>
     </DataVisualizationContainer>
   );
 };
