@@ -17,11 +17,11 @@ const getNotifications = async ({
   start_date,
   end_date,
 }: IGetAllArgs) => {
-  const params: Record<string, any> = {
+  const params: Record<string, unknown> = {
     location,
     size,
     page,
-  };
+  };  
 
   if (start_date) {
     params.start_date = start_date;
@@ -46,7 +46,9 @@ const useGetNotifications = ({
   return useQuery(
     ["GET_NOTIFICATIONS", location, size, page, start_date, end_date],
     () => getNotifications({ location, size, page, start_date, end_date }),
-    { keepPreviousData: true }
+    { keepPreviousData: true,
+      retry: false,
+     }
   );
 };
 
