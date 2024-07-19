@@ -70,27 +70,28 @@ const NotificationsPage: NextPageWithLayout = () => {
         ...query,
         start_date: dateRange.startDate || undefined,
         end_date: dateRange.endDate || undefined,
-        page: currentPage,
+        page: 1,
       },
     });
   };
 
   const clearFilters = () => {
-    const newQuery = { ...query, startDate: undefined, endDate: undefined };
+    // const newQuery = { ...query, startDate: undefined, endDate: undefined };
 
-    delete newQuery.startDate;
-    delete newQuery.endDate;
+    // delete newQuery.startDate;
+    // delete newQuery.endDate;
 
     router.push({
       pathname: router.pathname,
-      query: { ...newQuery },
     });
 
     setDateRange({ startDate: "", endDate: "" });
   };
+
   if (isFetching || isInitialLoading) {
     return <Spinner />;
   }
+
   return (
     <NotificationsContainer>
       <h1>Notification</h1>
@@ -110,7 +111,12 @@ const NotificationsPage: NextPageWithLayout = () => {
           onChange={handleDateChange}
           value={dateRange.endDate}
         />
-        <button onClick={filterByDateRange}>filter by date range</button>
+        <button
+          disabled={dateRange.startDate === ""}
+          onClick={filterByDateRange}
+        >
+          filter by date range
+        </button>
         <button onClick={clearFilters}>clear filters</button>
       </FilterBox>
       {notifications?.length > 0 ? (
