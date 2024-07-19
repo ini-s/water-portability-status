@@ -1,29 +1,29 @@
-import { ImageContainer, SafeScreenContainer, TextContainer } from "../../styles/safety-screen.styles";
+import {
+  ImageContainer,
+  SafeScreenContainer,
+  TextContainer,
+} from "../../styles/safety-screen.styles";
 
 import Image from "next/image";
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
 
-const SafetyScreen: React.FC = () => {
-  const [isUnsafe, setIsUnsafe] = useState(true);
-
+const SafetyScreen = ({ isSafe }: { isSafe: boolean }) => {
   return (
     <SafeScreenContainer>
-      
-        <TextContainer>
-          <h2>This Water is </h2>
-          <h1>{isUnsafe ? " Unsafe for Use" : " Safe for Use"}</h1>
-        </TextContainer>
+      <TextContainer>
+        <h2>This Water is </h2>
+        <h1>{!isSafe ? " Unsafe for Use" : " Safe for Use"}</h1>
+      </TextContainer>
 
-        <ImageContainer>
-          <Image
-          src={isUnsafe ? "/images/redthumbs.png" : "/images/greenthumbs.png"}
+      <ImageContainer>
+        <Image
+          src={!isSafe ? "/images/redthumbs.png" : "/images/greenthumbs.png"}
           width={200}
           height={207}
-          alt={isUnsafe ? "" : ""}
-          />
-        </ImageContainer>
-      
+          alt={!isSafe ? "thumbs-up-icon" : "thumbs-down-icon"}
+          priority
+        />
+      </ImageContainer>
     </SafeScreenContainer>
   );
 };
