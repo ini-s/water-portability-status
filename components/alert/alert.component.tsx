@@ -1,29 +1,45 @@
-import { useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import React, { useState } from "react";
 
 import { AlertContainer } from "../../styles/alert.styles";
-import useAddLocation from "../../server-store/mutations/useAddLocation";
 
 const Alert = () => {
-  const [realTimeData, setRealTimeData] = useState(null);
-
-  const router = useRouter();
-  const { location } = router.query;
-
-  const { data: addLocation, isLoading, error } = useAddLocation();
-
-  // const getRealTimeData = () => {
-  //   if (location !== "") addLocation(location,
-  //     onSuccess: (data: SetStateAction<null>) => {
-  //       console.log('onSuccess data:', data);
-  //       setRealTimeData(data)
-  //     }
-  //   );
-  // };
-
+  const [isUnsafe, setIsUnsafe] = useState(true);
   return (
     <AlertContainer>
-      {/* <button onClick={getRealTimeData}>real time date</button> */}
+      <p>Report at 21/06/2024 09:00</p>
+      <h1>ALERT</h1>
+      <p>
+        {isUnsafe ? (
+          <>
+            pH is not within acceptable range
+            <br />
+            Temperature is not within acceptable range
+            <br />
+            Specific Gravity is not within acceptable range
+            <br />
+            Total Dissolved Solids is not within acceptable range
+            <br />
+            Salinity is not within acceptable range
+            <br />
+            Electrical Conductivity is not within acceptable range
+          </>
+        ) : (
+          <>
+            pH is within acceptable range
+            <br />
+            Temperature is within acceptable range
+            <br />
+            Specific Gravity is within acceptable range
+            <br />
+            Total Dissolved Solids is within acceptable range
+            <br />
+            Salinity is within acceptable range
+            <br />
+            Electrical Conductivity is within acceptable range
+          </>
+        )}
+      </p>
+      <button>Get Real-time Data</button>
     </AlertContainer>
   );
 };

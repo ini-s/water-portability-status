@@ -25,6 +25,7 @@ const Homepage = () => {
         <Button onClick={() => handleLocationSelect("iwaya")}>Iwaya</Button>
         <Button onClick={() => handleLocationSelect("bariga")}>Bariga</Button>
       </ButtonsContainer>
+      
     </HomePageContainer>
   );
 };
