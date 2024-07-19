@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useState } from "react";
+import dayjs from "dayjs";
 
 import { AlertContainer } from "../../styles/alert.styles";
 
@@ -7,8 +8,15 @@ import useAddLocation from "../../server-store/mutations/useAddLocation";
 
 import { getLocationFromQuery } from "../../server-store/queries/queries";
 import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
+import { IWaterData } from "../../types/data-types";
 
-const Alert = ({ isSafe }: { isSafe: boolean }) => {
+const Alert = ({
+  isSafe,
+  currentWaterData,
+}: {
+  isSafe: boolean;
+  currentWaterData: IWaterData;
+}) => {
   const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
 
   const router = useRouter();
@@ -33,7 +41,10 @@ const Alert = ({ isSafe }: { isSafe: boolean }) => {
 
   return (
     <AlertContainer>
-      <p>Report at 21/06/2024 09:00</p>
+      <p>
+        Report at{" "}
+        {dayjs(currentWaterData?.created_at).format("MM/DD/YYYY HH:mm")}
+      </p>
       <h1>ALERT</h1>
       <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
         {!isSafe ? (
