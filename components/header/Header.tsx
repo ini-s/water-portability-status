@@ -15,9 +15,8 @@ import {
 
 import ExportData from "../export-data/export-data";
 
-// import { categoriesData } from "../../data/categories";
-
 import { getLocationFromQuery } from "../../server-store/queries/queries";
+import { useEffect, useState } from "react";
 
 interface IHeaderProps {
   exportData?: boolean;
@@ -25,8 +24,10 @@ interface IHeaderProps {
 }
 
 const Header = ({ exportData, removeBtn }: IHeaderProps) => {
+  const [locationText, setLocationText] = useState("");
+
   const router = useRouter();
-  const { query, asPath } = router;
+  const { query } = router;
   const queryLocation = getLocationFromQuery(query.location);
 
   const showDataVisualization = () => {
@@ -43,17 +44,18 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
     });
   };
 
-  let locationText = "";
-  if (asPath.includes("location=iwaya")) {
-    locationText = "iwaya";
-  } else if (asPath.includes("location=bariga")) {
-    locationText = "bariga";
-  }
+  useEffect(() => {
+    if (query && queryLocation === "iwaya") {
+      setLocationText("iwaya");
+    }
+    setLocationText("bariga");
+  }, [query, queryLocation]);
+
   return (
     <HeaderWrapper>
       <Navbar>
         <LogoContainer>
-        <h3 suppressHydrationWarning>{locationText}</h3>
+          <h3>{locationText ?? ""}</h3>
           {
             <Logo>
               <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
@@ -62,20 +64,20 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
         </LogoContainer>
         <h5>water status</h5>
       </Navbar>
+
       <Navlink>
         <ul>
           <li>
             <NotificationButton>
               <button onClick={goToNotifications}>
-                {" "}
                 <FaBell />
               </button>
             </NotificationButton>
-            <li>
-              <Link href="/" passHref>
-                Home
-              </Link>
-            </li>
+          </li>
+          <li>
+            <Link href="/">Home</Link>
+          </li>
+          <li>
             {!exportData ? (
               <Button onClick={showDataVisualization}>
                 Data Visualization
