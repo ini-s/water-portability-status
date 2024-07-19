@@ -1,29 +1,36 @@
 import { useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
 
 import { AlertContainer } from "../../styles/alert.styles";
+
 import useAddLocation from "../../server-store/mutations/useAddLocation";
 
+import { getLocationFromQuery } from "../../server-store/queries/queries";
+import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
+
 const Alert = () => {
-  const [realTimeData, setRealTimeData] = useState(null);
+  const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
 
   const router = useRouter();
   const { location } = router.query;
 
-  const { data: addLocation, isLoading, error } = useAddLocation();
+  const queryLocation = getLocationFromQuery(location);
 
-  // const getRealTimeData = () => {
-  //   if (location !== "") addLocation(location,
-  //     onSuccess: (data: SetStateAction<null>) => {
-  //       console.log('onSuccess data:', data);
-  //       setRealTimeData(data)
-  //     }
-  //   );
-  // };
+  const { mutateAsync: addLocation, isLoading, error } = useAddLocation();
+
+  const getRealTimeData = async () => {
+    await addLocation(queryLocation, {
+      onSuccess: (dt) => setRealTimeData(dt),
+    });
+  };
+
+  console.log(realTimeData);
 
   return (
     <AlertContainer>
-      {/* <button onClick={getRealTimeData}>real time date</button> */}
+      <button disabled={!location} onClick={getRealTimeData}>
+        real time date
+      </button>
     </AlertContainer>
   );
 };
