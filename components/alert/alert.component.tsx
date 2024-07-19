@@ -8,8 +8,7 @@ import useAddLocation from "../../server-store/mutations/useAddLocation";
 import { getLocationFromQuery } from "../../server-store/queries/queries";
 import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
 
-const Alert = () => {
-  const [isUnsafe, setIsUnsafe] = useState(true);
+const Alert = ({ isSafe }: { isSafe: boolean }) => {
   const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
 
   const router = useRouter();
@@ -27,12 +26,17 @@ const Alert = () => {
 
   console.log(realTimeData);
 
+  //NOTE: Instructions for Ginika
+  //Pass realTimeData as a prop into modal component
+  //Give it the same type as i did for waterParameters component waterQualityData and then map through it do display the data
+  //Use WaterParameters component as a guide
+
   return (
     <AlertContainer>
       <p>Report at 21/06/2024 09:00</p>
       <h1>ALERT</h1>
-      <p>
-        {isUnsafe ? (
+      <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
+        {!isSafe ? (
           <>
             pH is not within acceptable range
             <br />
