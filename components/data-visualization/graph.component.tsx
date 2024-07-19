@@ -57,6 +57,9 @@ const Graph = ({
           labels: data.labels,
           datasets: [
             {
+              borderColor: "rgba(0, 153, 255, 0.5",
+              borderWidth: 2,
+              fill: true,
               label: data.subtitle,
               data: data.values,
             },
@@ -73,34 +76,34 @@ const Graph = ({
         options={{
           responsive: true,
           plugins: {
-            title: {
-              text: propertyName,
-              display: true,
-            },
             subtitle: {
               display: true,
               text: data.subtitle,
             },
             legend: {
-              display: true,
-              labels: {
-                boxHeight: 0,
-                usePointStyle: true,
-              },
+              display: false,
             },
           },
+
           scales: {
             x: {
               title: {
                 display: true,
                 text: data.xLabel,
+                font: {
+                  size: 12,
+                },
               },
             },
             y: {
               title: {
                 display: true,
                 text: data.yLabel,
+                font: {
+                  size: 12,
+                },
               },
+
               ticks: {
                 stepSize: 1,
               },

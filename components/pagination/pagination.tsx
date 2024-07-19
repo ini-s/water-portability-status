@@ -1,12 +1,19 @@
 import {
   Dispatch,
   SetStateAction,
-  useState,
-  useEffect,
   useCallback,
+  useEffect,
+  useState,
 } from "react";
 
 import { PaginationBox } from "../../styles/notifications.styles";
+
+import {
+  FaAngleDoubleLeft,
+  FaAngleLeft,
+  FaAngleDoubleRight,
+  FaAngleRight,
+} from "react-icons/fa";
 
 const Pagination = ({
   size,
@@ -59,16 +66,28 @@ const Pagination = ({
   return (
     <PaginationBox>
       <ul>
-        {/* <li></li>  when clicked, setCurrentPage(1) */}
-        <li onClick={handlePrevious}>P</li>
+        {
+          <li>
+            <FaAngleDoubleLeft />
+          </li> /*when clicked, setCurrentPage(1) */
+        }
+        <li onClick={handlePrevious}>
+          <FaAngleLeft />
+        </li>
         {pageRange.map((no) => (
           <li key={no} onClick={() => handlePageChange(no)}>
             {no}
           </li>
         ))}
         <li>1-{noOfPages}</li>
-        <li onClick={handleNext}>N</li>
-        {/* <li></li>  when clicked, setCurrentPage(noOfPages) */}
+        <li onClick={handleNext}>
+          <FaAngleRight />
+        </li>
+        {
+          <li>
+            <FaAngleDoubleRight />
+          </li> /* when clicked, setCurrentPage(noOfPages) */
+        }
       </ul>
     </PaginationBox>
   );

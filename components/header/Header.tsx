@@ -1,8 +1,17 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaBell } from "react-icons/fa";
 import { useRouter } from "next/router";
 
-import { HeaderWrapper, Logo } from "../../styles/header.styles";
+import {
+  HeaderWrapper,
+  Logo,
+  Button,
+  Navbar,
+  LogoContainer,
+  Navlink,
+  NotificationButton,
+} from "../../styles/header.styles";
 
 import ExportData from "../export-data/export-data";
 
@@ -17,8 +26,7 @@ interface IHeaderProps {
 
 const Header = ({ exportData, removeBtn }: IHeaderProps) => {
   const router = useRouter();
-  const { query } = router;
-
+  const { query, asPath } = router;
   const queryLocation = getLocationFromQuery(query.location);
 
   const showDataVisualization = () => {
@@ -35,23 +43,43 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
     });
   };
 
+  let locationText = "";
+  if (asPath.includes("location=iwaya")) {
+    locationText = "iwaya";
+  } else if (asPath.includes("location=bariga")) {
+    locationText = "bariga";
+  }
   return (
     <HeaderWrapper>
-      {/* <Logo>
-        <Image src="" alt="logo" fill sizes="100%" />
-      </Logo> */}
-      <ul>
-        <li></li>
-        <li>Home</li>
-        <li>
-          <button onClick={goToNotifications}>Notifications</button>
-        </li>
-        {!removeBtn && (
+      <Navbar>
+        <LogoContainer>
+        <h3 suppressHydrationWarning>{locationText}</h3>
+          {
+            <Logo>
+              <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
+            </Logo>
+          }
+        </LogoContainer>
+        <h5>water status</h5>
+      </Navbar>
+      <Navlink>
+        <ul>
           <li>
-            {!exportData ? (
-              <button onClick={showDataVisualization}>
-                Data Visualization
+            <NotificationButton>
+              <button onClick={goToNotifications}>
+                {" "}
+                <FaBell />
               </button>
+            </NotificationButton>
+            <li>
+              <Link href="/" passHref>
+                Home
+              </Link>
+            </li>
+            {!exportData ? (
+              <Button onClick={showDataVisualization}>
+                Data Visualization
+              </Button>
             ) : (
               <ExportData
                 // data={categoriesData}
@@ -59,8 +87,8 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
               />
             )}
           </li>
-        )}
-      </ul>
+        </ul>
+      </Navlink>
     </HeaderWrapper>
   );
 };
