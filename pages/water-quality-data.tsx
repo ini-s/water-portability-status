@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { NextPageWithLayout } from "./_app";
 
@@ -28,7 +28,13 @@ const LocationPage: NextPageWithLayout = () => {
     useGetWaterQualityData({ location: queryLocation, size });
 
   const waterQualityData = data || [];
-  const waterData = useMemo(() => (data && data.length > 0 ? data[0] : null), [data]);
+
+  // const waterData = useMemo(
+  //   () => (data && data.length > 0 ? data[0] : null),
+  //   [data]
+  // );
+
+  const waterData = data && data.length > 0 ? data[0] : null;
 
   useEffect(() => {
     if (waterData?.prediction_log.potability === true) {
@@ -40,18 +46,18 @@ const LocationPage: NextPageWithLayout = () => {
 
   const isDataVisualization = query.dataVisualization === "true";
 
-  console.log(waterData?.prediction_log.potability);
+  const isPortable = waterData?.prediction_log.potability ?? false;
 
   return (
     <div>
       {!isDataVisualization ? (
-        <SafetyScreen />
+        <SafetyScreen isSafe={isPortable} />
       ) : (
         <DataVisualization waterData={waterQualityData} />
       )}
       <div>
-        <WaterParameters />
-        <Alert />
+        <WaterParameters waterQualityData={waterQualityData} />
+        <Alert isSafe={isPortable} />
       </div>
     </div>
   );
