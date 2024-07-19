@@ -57,7 +57,7 @@ const LocationPage: NextPageWithLayout = () => {
       )}
       <div>
         <WaterParameters waterQualityData={waterQualityData} />
-        <Alert isSafe={isPortable} />
+        <Alert isSafe={isPortable} currentWaterData={waterData} />
       </div>
     </div>
   );
