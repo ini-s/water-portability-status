@@ -46,6 +46,7 @@ const NotificationsPage: NextPageWithLayout = () => {
     startDate: "",
     endDate: "",
   });
+  const [errorMessage, setErrorMessage] = useState("");
 
   const { data, isInitialLoading, isFetching, isPreviousData } =
     useGetNotifications({
@@ -55,7 +56,6 @@ const NotificationsPage: NextPageWithLayout = () => {
       end_date: endDate,
       size,
     });
-
   const notifications: INotifications[] = data?.notifications;
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +63,16 @@ const NotificationsPage: NextPageWithLayout = () => {
     setDateRange((prev) => ({ ...prev, [name]: value }));
   };
 
-  const filterByDateRange = () => {
+  const filterByDateRange = (e: React.MouseEvent<HTMLButtonElement>) => {
+    e.preventDefault();
+
+    if (dayjs(dateRange.startDate).isAfter(dayjs(dateRange.endDate))) {
+      setErrorMessage("Start date cannot be after end date.");
+      return;
+    }
+
+    setErrorMessage("");
+
     router.push({
       pathname: router.pathname,
       query: {
@@ -76,13 +85,14 @@ const NotificationsPage: NextPageWithLayout = () => {
   };
 
   const clearFilters = () => {
-    // const newQuery = { ...query, startDate: undefined, endDate: undefined };
+    const newQuery = { ...query, start_date: undefined, end_date: undefined };
 
-    // delete newQuery.startDate;
-    // delete newQuery.endDate;
+    delete newQuery.start_date;
+    delete newQuery.end_date;
 
     router.push({
       pathname: router.pathname,
+      query: { ...newQuery, page: 1 },
     });
 
     setDateRange({ startDate: "", endDate: "" });
@@ -96,28 +106,34 @@ const NotificationsPage: NextPageWithLayout = () => {
     <NotificationsContainer>
       <h1>Notification</h1>
       <FilterBox>
-        <input
-          type="date"
-          id="startDate"
-          name="startDate"
-          onChange={handleDateChange}
-          value={dateRange.startDate}
-        />
+        <div>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            onChange={handleDateChange}
+            value={dateRange.startDate}
+          />
 
-        <input
-          type="date"
-          id="endDate"
-          name="endDate"
-          onChange={handleDateChange}
-          value={dateRange.endDate}
-        />
-        <button
-          disabled={dateRange.startDate === ""}
-          onClick={filterByDateRange}
-        >
-          filter by date range
-        </button>
-        <button onClick={clearFilters}>clear filters</button>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            onChange={handleDateChange}
+            value={dateRange.endDate}
+          />
+
+          <button
+            disabled={dateRange.startDate === ""}
+            onClick={filterByDateRange}
+          >
+            filter by date range
+          </button>
+          <button type="button" onClick={clearFilters}>
+            clear filters
+          </button>
+        </div>
+        {errorMessage && <p>{errorMessage}</p>}
       </FilterBox>
       {notifications?.length > 0 ? (
         <>
