@@ -21,7 +21,7 @@ const getNotifications = async ({
     location,
     size,
     page,
-  };  
+  };
 
   if (start_date) {
     params.start_date = start_date;
@@ -46,9 +46,7 @@ const useGetNotifications = ({
   return useQuery(
     ["GET_NOTIFICATIONS", location, size, page, start_date, end_date],
     () => getNotifications({ location, size, page, start_date, end_date }),
-    { keepPreviousData: true,
-      retry: false,
-     }
+    { keepPreviousData: true, retry: false, staleTime: 1000 * 60 * 2 }
   );
 };
 
