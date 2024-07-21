@@ -53,7 +53,7 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
     <HeaderWrapper>
       <Navbar>
         <LogoContainer>
-        <h3 suppressHydrationWarning>{locationText}</h3>
+          <h3 suppressHydrationWarning>{locationText}</h3>
           {
             <Logo>
               <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
@@ -71,11 +71,13 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
                 <FaBell />
               </button>
             </NotificationButton>
-            <li>
-              <Link href="/" passHref>
-                Home
-              </Link>
-            </li>
+          </li>
+          <li>
+            <Link href="/" passHref>
+              Home
+            </Link>
+          </li>
+          <li>
             {!exportData ? (
               <Button onClick={showDataVisualization}>
                 Data Visualization
