@@ -12,7 +12,7 @@ export const LogoContainer = styled.div`
   > h3 {
     text-transform: uppercase;
     font-weight: 700;
-    font-size: 2rem;
+    font-size: 1.5rem;
 
     @media (max-width: 62.5em) {
       font-size: 0.9375rem;
@@ -22,9 +22,9 @@ export const LogoContainer = styled.div`
 export const Navbar = styled.nav`
   display: flex;
   flex-direction: column;
-  padding-left: 3.1rem;
-  padding-top: 1.8rem;
-  padding-bottom: 1rem;
+  padding-left: 2.5rem;
+  padding-top: 1rem;
+  padding-bottom: 0.2rem;
 
   @media (max-width: 62.5em) {
     padding: 0.5rem 1.5rem;
@@ -32,9 +32,9 @@ export const Navbar = styled.nav`
 
   > h5 {
     font-weight: 300;
-    font-size: 1.0938rem;
+    font-size: 0.938rem;
     text-transform: capitalize;
-    margin-top: -0.4rem;
+    margin-top: -0.6rem;
     margin-left: 0.0563rem;
 
     @media (max-width: 62.5em) {
@@ -46,8 +46,8 @@ export const Navbar = styled.nav`
 
 export const Logo = styled.div`
   position: relative;
-  height: 2.75rem;
-  width: 2.75rem;
+  height: 2.2rem;
+  width: 2.2rem;
   margin-left: -0.65rem;
 
   @media (max-width: 62.5em) {
@@ -81,7 +81,7 @@ export const Navlink = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 1.3rem;
+      font-size: 1.2rem;
 
       @media (max-width: 62.5em) {
         font-size: 0.75rem;
@@ -106,8 +106,8 @@ export const Navlink = styled.div`
 export const NotificationButton = styled.div`
   > button {
     border: none;
-    margin-top: 0.2rem;
-    font-size: 1.25rem;
+    margin-top: 0.3rem;
+    font-size: 1rem;
     background-color: rgb(var(--color-white));
 
     @media (max-width: 62.5em) {
@@ -120,11 +120,10 @@ export const Button = styled.button`
   background-color: rgb(var(--color-black));
   color: rgb(var(--color-white));
   border-radius: 1.3rem;
-  width: 9.5rem;
+  width: 8rem;
   padding-top: 0.35rem;
   padding-bottom: 0.35rem;
-  font-size: 0.56rem;
-  font-size: 1rem;
+  font-size: 0.8rem;
   border: none;
 
   &:hover {
