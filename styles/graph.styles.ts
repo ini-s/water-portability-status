@@ -10,11 +10,11 @@ export const GraphContainer = styled.section`
     padding-left: 0.3rem;
   }
   @media (max-width: 37.5em) and (min-width: 25.0625em) {
-    padding-left: 0.3rem ;
+    padding-left: 0.1rem ; 
     height: 19rem;
   }
   @media (max-width:62.5em) and (min-width: 37.5625em) {
-    padding-left: 1.8rem ;
+    padding-left: 0.9rem ;
     height: 25rem;
   }
 `;
