@@ -1,4 +1,4 @@
-import { Line } from "react-chartjs-2";
+import { Line, Scatter } from "react-chartjs-2";
 import {
   CategoryScale,
   LinearScale,
@@ -15,6 +15,7 @@ import {
 import { GraphContainer } from "../../styles/graph.styles";
 
 import { IPredictionLogs, PropertyData } from "../../types/data-types";
+import { type } from "os";
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -57,7 +58,8 @@ const Graph = ({
           labels: data.labels,
           datasets: [
             {
-              borderColor: "rgba(0, 153, 255, 0.5",
+              borderColor: "rgba(0, 153, 255, 0.5)",
+              pointBackgroundColor: "rgba(0, 153, 255, 0.5)",
               borderWidth: 2,
               fill: true,
               label: data.subtitle,
@@ -68,6 +70,10 @@ const Graph = ({
                   {
                     label: propertyName,
                     data: predictionValues,
+                    borderColor: "red",
+                    showLine: false,
+                    pointBackgroundColor: "red",
+                    pointBorderColor: "red",
                   },
                 ]
               : []),
