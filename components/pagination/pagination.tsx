@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useRouter } from "next/router";
 
 import { PaginationBox } from "../../styles/notifications.styles";
 
@@ -29,6 +30,9 @@ const Pagination = ({
   const noOfPages = Math.ceil(size / postsPerPage);
   const [pageRange, setPageRange] = useState<number[]>([]);
 
+  const router = useRouter();
+  const { query } = router;
+
   const updatePageRange = useCallback(
     (newPage: number) => {
       let startPage = Math.floor((newPage - 1) / 3) * 3 + 1;
@@ -43,6 +47,14 @@ const Pagination = ({
   const handlePageChange = (no: number) => {
     setCurrentPage(no);
     updatePageRange(no);
+
+    router.push({
+      pathname: router.pathname,
+      query: {
+        ...query,
+        page: no,
+      },
+    });
   };
 
   const handlePrevious = () => {
