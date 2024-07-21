@@ -10,6 +10,8 @@ import {
   FilterBox,
   NotificationsContainer,
   Table,
+  NotificationHeader,
+  FilterButton,
 } from "../styles/notifications.styles";
 
 import Pagination from "../components/pagination/pagination";
@@ -88,59 +90,76 @@ const NotificationsPage: NextPageWithLayout = () => {
 
     setDateRange({ startDate: "", endDate: "" });
   };
-  if (isFetching || isInitialLoading) {
-    return <Spinner />;
-  }
+
   return (
     <NotificationsContainer>
-      <h1>Notification</h1>
-      <FilterBox>
-        <input
-          type="date"
-          id="startDate"
-          name="startDate"
-          onChange={handleDateChange}
-          value={dateRange.startDate}
-        />
-
-        <input
-          type="date"
-          id="endDate"
-          name="endDate"
-          onChange={handleDateChange}
-          value={dateRange.endDate}
-        />
-        <button onClick={filterByDateRange}>filter by date range</button>
-        <button onClick={clearFilters}>clear filters</button>
-      </FilterBox>
-      {notifications?.length > 0 ? (
-        <>
-          <Table>
-            <thead>
-              <tr>
-                <th>date & time</th>
-                <th>event description</th>
-              </tr>
-            </thead>
-            <tbody>
-              {notifications?.length > 0 &&
-                notifications.map((el, index) => (
-                  <tr key={index}>
-                    <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
-                    <td>{el.message}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-          <Pagination
-            size={data?.total_count ?? 0}
-            postsPerPage={size}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
+      <NotificationHeader>
+        <h1>Notification</h1>
+        <FilterBox>
+          <p>Filter by Date Range</p>
+          <input
+            type="date"
+            id="startDate"
+            name="startDate"
+            onChange={handleDateChange}
+            value={dateRange.startDate}
           />
-        </>
-      ) : (
-        <NoDataComponent />
+          <p>-</p>
+          <input
+            type="date"
+            id="endDate"
+            name="endDate"
+            onChange={handleDateChange}
+            value={dateRange.endDate}
+          />
+          <FilterButton>
+            <button onClick={filterByDateRange}>filter </button>
+            <button onClick={clearFilters}>clear filter</button>
+          </FilterButton>
+        </FilterBox>
+      </NotificationHeader>
+
+      <Table>
+        <thead>
+          <tr>
+            <th>date & time</th>
+            <th>event description</th>
+          </tr>
+        </thead>
+        {isFetching || isInitialLoading ? (
+          <tbody>
+            <tr>
+              <td colSpan={2} style={{ textAlign: "center" }}>
+                <Spinner />
+              </td>
+            </tr>
+          </tbody>
+        ) : notifications?.length > 0 ? (
+          <tbody>
+            {notifications.map((el, index) => (
+              <tr key={index}>
+                <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
+                <td>{el.message}</td>
+              </tr>
+            ))}
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td colSpan={2} style={{ textAlign: "center" }}>
+                <NoDataComponent />
+              </td>
+            </tr>
+          </tbody>
+        )}
+      </Table>
+      {notifications?.length > 0 && (
+        <Pagination
+          size={data?.total_count ?? 0}
+          postsPerPage={size}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       )}
     </NotificationsContainer>
   );
