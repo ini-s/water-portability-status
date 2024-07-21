@@ -35,36 +35,45 @@ export const Table = styled.table`
   }
 `;
 
-export const FilterBox = styled.div`
-  display: flex;
-  align-items: center;
+export const FilterBox = styled.form`
   margin-bottom: 1rem;
 
-  & > input {
-    border: 1px solid rgb(var(--color-black));
-    border-radius: 5px;
-    padding: 0.5rem;
+  & > p {
+    color: rgb(var(--color-red));
+  }
 
-    &::-webkit-datetime-edit {
-      padding: 1em;
-    }
-    &::-webkit-datetime-edit-fields-wrapper {
-    }
-    &::-webkit-datetime-edit-text {
-    }
-    &::-webkit-datetime-edit-month-field {
-    }
-    &::-webkit-datetime-edit-day-field {
-    }
-    &::-webkit-datetime-edit-year-field {
-    }
-    &::-webkit-inner-spin-button {
-      display: none;
-    }
-    &::-webkit-calendar-picker-indicator {
+  & > div {
+    display: flex;
+    align-items: center;
+
+    & > input {
+      border: 1px solid rgb(var(--color-black));
+      border-radius: 5px;
+      padding: 0.5rem;
+
+      &::-webkit-datetime-edit {
+        padding: 1em;
+      }
+      &::-webkit-datetime-edit-fields-wrapper {
+      }
+      &::-webkit-datetime-edit-text {
+      }
+      &::-webkit-datetime-edit-month-field {
+      }
+      &::-webkit-datetime-edit-day-field {
+      }
+      &::-webkit-datetime-edit-year-field {
+      }
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+      &::-webkit-calendar-picker-indicator {
+      }
     }
   }
 `;
+
+export const InputContainer = styled.div``;
 
 export const SearchBox = styled.div`
   margin-left: auto;
