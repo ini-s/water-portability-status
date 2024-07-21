@@ -19,12 +19,12 @@ const getWaterQualityData = async ({
 
 const useGetWaterQualityData = ({
   location = "",
-  size = 8,
+  size = 6,
 }: Pick<IGetAllArgs, "location" | "size">) => {
   return useQuery(
     ["GET_WATER_QUALITY_DATA", location, size],
     () => getWaterQualityData({ location, size }),
-    { keepPreviousData: true }
+    { keepPreviousData: true, retry: false }
   );
 };
 

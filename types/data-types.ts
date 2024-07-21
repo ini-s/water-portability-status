@@ -21,7 +21,7 @@ export interface ICategory {
 
 export interface IPredictionLogs {
   ph: number;
-  portability: boolean;
+  potability: boolean;
   temperature: number;
 }
 export interface IWaterData {

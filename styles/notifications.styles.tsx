@@ -69,77 +69,77 @@ export const NotificationHeader = styled.div`
   }
 `;
 
-export const FilterBox = styled.div`
-  display: flex;
-  align-items: center;
-  text-align: right;
-  margin-left: auto;
-  gap: 0.25rem;
+// export const FilterBox = styled.div`
+//   display: flex;
+//   align-items: center;
+//   text-align: right;
+//   margin-left: auto;
+//   gap: 0.25rem;
 
-  @media (max-screen: 43.75em) {
-    gap: 0.1rem;
-  }
+//   @media (max-screen: 43.75em) {
+//     gap: 0.1rem;
+//   }
 
-  & > p {
-    font-size: 0.5625rem;
-    font-weight: 700;
+//   & > p {
+//     font-size: 0.5625rem;
+//     font-weight: 700;
 
-    @media (max-width: 43.75em) {
-      font-size: 0.3125rem;
-    }
-  }
+//     @media (max-width: 43.75em) {
+//       font-size: 0.3125rem;
+//     }
+//   }
 
-  & > input {
-    border: 0.06rem solid rgb(var(--color-black));
-    border-radius: 0.5rem;
-    text-transform: uppercase;
-    background-color: rgb(var(--color-light-grey));
-    font-size: 0.53rem;
-    font-weight: 800;
-    height: 1.7rem;
-    width: 4rem;
+//   & > input {
+//     border: 0.06rem solid rgb(var(--color-black));
+//     border-radius: 0.5rem;
+//     text-transform: uppercase;
+//     background-color: rgb(var(--color-light-grey));
+//     font-size: 0.53rem;
+//     font-weight: 800;
+//     height: 1.7rem;
+//     width: 4rem;
 
-    @media (max-width: 20em) {
-      width: 1.9rem;
-      height: 0.6rem;
-      font-size: 0.18rem;
-      border-radius: 0.2rem;
-    }
+//     @media (max-width: 20em) {
+//       width: 1.9rem;
+//       height: 0.6rem;
+//       font-size: 0.18rem;
+//       border-radius: 0.2rem;
+//     }
 
-    @media (max-width: 43.75em) and (min-width: 20.0625em) {
-      width: 2.0838rem;
-      height: 0.7987rem;
-      font-size: 0.2rem;
-      border-radius: 0.2rem;
-    }
-  }
+//     @media (max-width: 43.75em) and (min-width: 20.0625em) {
+//       width: 2.0838rem;
+//       height: 0.7987rem;
+//       font-size: 0.2rem;
+//       border-radius: 0.2rem;
+//     }
+//   }
 
-  &::-webkit-datetime-edit {
-    padding: 1em;
-  }
+//   &::-webkit-datetime-edit {
+//     padding: 1em;
+//   }
 
-  &::-webkit-datetime-edit-fields-wrapper {
-  }
+//   &::-webkit-datetime-edit-fields-wrapper {
+//   }
 
-  &::-webkit-datetime-edit-text {
-  }
+//   &::-webkit-datetime-edit-text {
+//   }
 
-  &::-webkit-datetime-edit-month-field {
-  }
+//   &::-webkit-datetime-edit-month-field {
+//   }
 
-  &::-webkit-datetime-edit-day-field {
-  }
+//   &::-webkit-datetime-edit-day-field {
+//   }
 
-  &::-webkit-datetime-edit-year-field {
-  }
+//   &::-webkit-datetime-edit-year-field {
+//   }
 
-  &::-webkit-inner-spin-button {
-    display: none;
-  }
+//   &::-webkit-inner-spin-button {
+//     display: none;
+//   }
 
-  &::-webkit-calendar-picker-indicator {
-  }
-`;
+//   &::-webkit-calendar-picker-indicator {
+//   }
+// `;
 
 export const FilterButton = styled.div`
   display: flex;
@@ -168,6 +168,45 @@ export const FilterButton = styled.div`
     }
   }
 `;
+export const FilterBox = styled.form`
+  margin-bottom: 1rem;
+
+  & > p {
+    color: rgb(var(--color-red));
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    & > input {
+      border: 1px solid rgb(var(--color-black));
+      border-radius: 5px;
+      padding: 0.5rem;
+
+      &::-webkit-datetime-edit {
+        padding: 1em;
+      }
+      &::-webkit-datetime-edit-fields-wrapper {
+      }
+      &::-webkit-datetime-edit-text {
+      }
+      &::-webkit-datetime-edit-month-field {
+      }
+      &::-webkit-datetime-edit-day-field {
+      }
+      &::-webkit-datetime-edit-year-field {
+      }
+      &::-webkit-inner-spin-button {
+        display: none;
+      }
+      &::-webkit-calendar-picker-indicator {
+      }
+    }
+  }
+`;
+
+export const InputContainer = styled.div``;
 
 export const SearchBox = styled.div`
   margin-left: auto;
@@ -178,7 +217,7 @@ export const PaginationBox = styled.div`
   justify-content: flex-end;
   margin: 5rem;
 
-  @media (max-width: 66.25em){
+  @media (max-width: 66.25em) {
     display: flex;
     justify-content: center;
   }
@@ -194,23 +233,23 @@ export const PaginationBox = styled.div`
       justify-content: center;
       align-items: center;
       padding: 0.5rem 1rem;
-      font-size: .6875rem;
+      font-size: 0.6875rem;
 
-      @media (max-width:340px){
+      @media (max-width: 340px) {
         font-size: 0.25rem;
         padding: 0.3rem 0.45rem;
       }
-      @media (max-width:28.125em) and (min-width: 341px){
-        font-size: 0.3rem ; 
+      @media (max-width: 28.125em) and (min-width: 341px) {
+        font-size: 0.3rem;
         padding: 0.39rem 0.5rem;
       }
-      @media (max-width:43.75em) and (min-width: 28.1875em){
+      @media (max-width: 43.75em) and (min-width: 28.1875em) {
         font-size: 0.45rem;
         padding: 0.4rem 0.67rem;
       }
 
       &:not(:last-child) {
-        border-right: .0625rem solid rgb(var(--color-black));
+        border-right: 0.0625rem solid rgb(var(--color-black));
       }
 
       &:last-child {

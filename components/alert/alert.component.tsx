@@ -1,29 +1,85 @@
 import { useRouter } from "next/router";
-import { SetStateAction, useState } from "react";
+import { useState } from "react";
+import dayjs from "dayjs";
 
 import { AlertContainer } from "../../styles/alert.styles";
+
 import useAddLocation from "../../server-store/mutations/useAddLocation";
 
-const Alert = () => {
-  const [realTimeData, setRealTimeData] = useState(null);
+import { getLocationFromQuery } from "../../server-store/queries/queries";
+import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
+import { IWaterData } from "../../types/data-types";
+
+const Alert = ({
+  isSafe,
+  currentWaterData,
+}: {
+  isSafe: boolean;
+  currentWaterData: IWaterData;
+}) => {
+  const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
 
   const router = useRouter();
   const { location } = router.query;
 
-  const { data: addLocation, isLoading, error } = useAddLocation();
+  const queryLocation = getLocationFromQuery(location);
 
-  // const getRealTimeData = () => {
-  //   if (location !== "") addLocation(location,
-  //     onSuccess: (data: SetStateAction<null>) => {
-  //       console.log('onSuccess data:', data);
-  //       setRealTimeData(data)
-  //     }
-  //   );
-  // };
+  const { mutateAsync: addLocation, isLoading, error } = useAddLocation();
+
+  const getRealTimeData = async () => {
+    await addLocation(queryLocation, {
+      onSuccess: (dt) => setRealTimeData(dt),
+    });
+  };
+
+  console.log(realTimeData);
+
+  //NOTE: Instructions for Ginika
+  //Pass realTimeData as a prop into modal component
+  //Give it the same type as i did for waterParameters component waterQualityData and then map through it do display the data
+  //Use WaterParameters component as a guide
 
   return (
     <AlertContainer>
-      {/* <button onClick={getRealTimeData}>real time date</button> */}
+      <p>
+        Report at{" "}
+        {dayjs(currentWaterData?.created_at).format("MM/DD/YYYY HH:mm")}
+      </p>
+      <h1>ALERT</h1>
+      <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
+        {!isSafe ? (
+          <>
+            pH is not within acceptable range
+            <br />
+            Temperature is not within acceptable range
+            <br />
+            Specific Gravity is not within acceptable range
+            <br />
+            Total Dissolved Solids is not within acceptable range
+            <br />
+            Salinity is not within acceptable range
+            <br />
+            Electrical Conductivity is not within acceptable range
+          </>
+        ) : (
+          <>
+            pH is within acceptable range
+            <br />
+            Temperature is within acceptable range
+            <br />
+            Specific Gravity is within acceptable range
+            <br />
+            Total Dissolved Solids is within acceptable range
+            <br />
+            Salinity is within acceptable range
+            <br />
+            Electrical Conductivity is within acceptable range
+          </>
+        )}
+      </p>
+      <button disabled={!location} onClick={getRealTimeData}>
+        Get Real-time Data
+      </button>
     </AlertContainer>
   );
 };

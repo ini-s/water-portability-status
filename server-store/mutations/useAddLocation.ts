@@ -1,24 +1,19 @@
+import { IGetAllArgs } from "../queries/useGetNotifications";
 import { api } from "../utils";
 
-import { useMutation, useQueryClient } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 
-interface AddLocationArg {
-  data: string;
-}
+type AddLocationArg = string;
 
-const addLocation = async (data: AddLocationArg) => {
-  const response = await api.post("/water-quality-data", data);
+const addLocation = async (data: AddLocationArg): Promise<IGetAllArgs> => {
+  const response = await api.post(`/water-quality-data?location=${data}`, data);
   return response.data.data;
 };
 
 const useAddLocation = () => {
-  const queryClient = useQueryClient();
-
-  return useMutation(addLocation)
-//     , {
-//     mutationKey: ["ADD_LOCATION"],
-//   }
-// );
+  return useMutation(addLocation, {
+    mutationKey: ["ADD_LOCATION"],
+  });
 };
 
 export default useAddLocation;
