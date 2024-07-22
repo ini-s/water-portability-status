@@ -100,15 +100,10 @@ const NotificationsPage: NextPageWithLayout = () => {
     setDateRange({ startDate: "", endDate: "" });
   };
 
-  if (isFetching || isInitialLoading) {
-    return <Spinner />;
-  }
-
   return (
     <NotificationsContainer>
       <NotificationHeader>
         <h1>Notification</h1>
-
         <FilterBox>
           <div>
             <p>Filter by Date Range</p>
@@ -119,7 +114,7 @@ const NotificationsPage: NextPageWithLayout = () => {
               onChange={handleDateChange}
               value={dateRange.startDate}
             />
-
+            <p>-</p>
             <input
               type="date"
               id="endDate"
@@ -127,15 +122,16 @@ const NotificationsPage: NextPageWithLayout = () => {
               onChange={handleDateChange}
               value={dateRange.endDate}
             />
-
-            <button
-              disabled={dateRange.startDate === ""}
-              onClick={filterByDateRange}>
-              filter by date range
-            </button>
-            <button type="button" onClick={clearFilters}>
-              clear filters
-            </button>
+            <FilterButton>
+              <button
+                disabled={dateRange.startDate === ""}
+                onClick={filterByDateRange}>
+                filter
+              </button>
+              <button type="button" onClick={clearFilters}>
+                clear filters
+              </button>
+            </FilterButton>
           </div>
           {errorMessage && <p>{errorMessage}</p>}
         </FilterBox>
