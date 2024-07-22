@@ -69,98 +69,34 @@ export const NotificationHeader = styled.div`
   }
 `;
 
-// export const FilterBox = styled.div`
-//   display: flex;
-//   align-items: center;
-//   text-align: right;
-//   margin-left: auto;
-//   gap: 0.25rem;
-
-//   @media (max-screen: 43.75em) {
-//     gap: 0.1rem;
-//   }
-
-//   & > p {
-//     font-size: 0.5625rem;
-//     font-weight: 700;
-
-//     @media (max-width: 43.75em) {
-//       font-size: 0.3125rem;
-//     }
-//   }
-
-//   & > input {
-//     border: 0.06rem solid rgb(var(--color-black));
-//     border-radius: 0.5rem;
-//     text-transform: uppercase;
-//     background-color: rgb(var(--color-light-grey));
-//     font-size: 0.53rem;
-//     font-weight: 800;
-//     height: 1.7rem;
-//     width: 4rem;
-
-//     @media (max-width: 20em) {
-//       width: 1.9rem;
-//       height: 0.6rem;
-//       font-size: 0.18rem;
-//       border-radius: 0.2rem;
-//     }
-
-//     @media (max-width: 43.75em) and (min-width: 20.0625em) {
-//       width: 2.0838rem;
-//       height: 0.7987rem;
-//       font-size: 0.2rem;
-//       border-radius: 0.2rem;
-//     }
-//   }
-
-//   &::-webkit-datetime-edit {
-//     padding: 1em;
-//   }
-
-//   &::-webkit-datetime-edit-fields-wrapper {
-//   }
-
-//   &::-webkit-datetime-edit-text {
-//   }
-
-//   &::-webkit-datetime-edit-month-field {
-//   }
-
-//   &::-webkit-datetime-edit-day-field {
-//   }
-
-//   &::-webkit-datetime-edit-year-field {
-//   }
-
-//   &::-webkit-inner-spin-button {
-//     display: none;
-//   }
-
-//   &::-webkit-calendar-picker-indicator {
-//   }
-// `;
-
 export const FilterButton = styled.div`
   display: flex;
   flex-direction: column;
+  margin: .3125rem 0;
+  
+
+  @media (max-width: 43.75em) {
+    display: flex;
+    flex-direction: column;
+  }
 
   & > button {
     background-color: rgb(var(--color-black));
     color: rgb(var(--color-white));
     border: none;
     border-radius: 0.59rem;
-    padding: 0.18rem 0.5rem;
+    padding: 0.08rem 0.35rem;
     text-transform: capitalize;
     cursor: pointer;
-    margin-bottom: 0.3rem;
-    font-size: 0.39rem;
+    font-size: 0.375rem;
     font-weight: 800;
+    text-transform: capitalize;
+    margin-bottom: .28rem;
 
     @media (max-width: 43.75em) {
-      padding: 0.05rem 0.3rem;
-      margin-bottom: 0.15rem;
-      font-size: 3.3px;
+      padding: 0.049rem 0.25rem;
+      font-size: .1875rem;
+      margin-bottom: .15rem;
     }
 
     &:hover {
@@ -169,7 +105,14 @@ export const FilterButton = styled.div`
   }
 `;
 export const FilterBox = styled.form`
-  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  text-align: right;
+  margin-left: auto;
+  margin-bottom: .125rem;
+  flex-direction: column;
+
+  
 
   & > p {
     color: rgb(var(--color-red));
@@ -178,35 +121,69 @@ export const FilterBox = styled.form`
   & > div {
     display: flex;
     align-items: center;
+    gap: 0.375rem;
+
+    @media (max-width: 43.75em) {
+      gap: 0.24rem;
+    }
+
+    & > p {
+      font-size: 0.5625rem;
+      font-weight: 700;
+
+      @media (max-width: 43.75em) {
+        font-size: 0.3125rem;
+      }
+    }
 
     & > input {
-      border: 1px solid rgb(var(--color-black));
-      border-radius: 5px;
-      padding: 0.5rem;
+      border: 0.04rem solid rgb(var(--color-black));
+      border-radius: 0.5rem;
+      text-transform: uppercase;
+      background-color: rgb(var(--color-light-grey));
+      font-size: 0.4375rem;
+      font-weight: 800;
+      height: 1.4375rem;
+      width: 3.75rem;
+      padding: 0 0.17rem;
 
-      &::-webkit-datetime-edit {
-        padding: 1em;
+      @media (max-width: 20em) {
+        width: 1.9rem;
+        height: 0.6rem;
+        font-size: 0.18rem;
+        border-radius: 0.2rem;
+        padding: 0 0.1rem;
       }
-      &::-webkit-datetime-edit-fields-wrapper {
+
+      @media (max-width: 43.75em) and (min-width: 20.0625em) {
+        width: 2.0838rem;
+        height: 0.7987rem;
+        font-size: 0.24rem;
+        border-radius: 0.2rem;
+        padding: 0 0.015rem;
       }
-      &::-webkit-datetime-edit-text {
-      }
-      &::-webkit-datetime-edit-month-field {
-      }
-      &::-webkit-datetime-edit-day-field {
-      }
-      &::-webkit-datetime-edit-year-field {
-      }
-      &::-webkit-inner-spin-button {
-        display: none;
-      }
-      &::-webkit-calendar-picker-indicator {
-      }
+    }
+
+    &::-webkit-datetime-edit {
+      padding: 1em;
+    }
+    &::-webkit-datetime-edit-fields-wrapper {
+    }
+    &::-webkit-datetime-edit-text {
+    }
+    &::-webkit-datetime-edit-month-field {
+    }
+    &::-webkit-datetime-edit-day-field {
+    }
+    &::-webkit-datetime-edit-year-field {
+    }
+    &::-webkit-inner-spin-button {
+      display: none;
+    }
+    &::-webkit-calendar-picker-indicator {
     }
   }
 `;
-
-export const InputContainer = styled.div``;
 
 export const SearchBox = styled.div`
   margin-left: auto;
@@ -235,11 +212,11 @@ export const PaginationBox = styled.div`
       padding: 0.5rem 1rem;
       font-size: 0.6875rem;
 
-      @media (max-width: 340px) {
+      @media (max-width: 21.25em) {
         font-size: 0.25rem;
         padding: 0.3rem 0.45rem;
       }
-      @media (max-width: 28.125em) and (min-width: 341px) {
+      @media (max-width: 28.125em) and (min-width: 21.3125em) {
         font-size: 0.3rem;
         padding: 0.39rem 0.5rem;
       }
