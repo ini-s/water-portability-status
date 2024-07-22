@@ -1,14 +1,17 @@
-import { useRouter } from "next/router";
-import { useState } from "react";
-import dayjs from "dayjs";
 
-import { AlertContainer } from "../../styles/alert.styles";
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import dayjs from 'dayjs';
 
-import useAddLocation from "../../server-store/mutations/useAddLocation";
+import { AlertContainer } from '../../styles/alert.styles';
 
-import { getLocationFromQuery } from "../../server-store/queries/queries";
-import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
-import { IWaterData } from "../../types/data-types";
+import useAddLocation from '../../server-store/mutations/useAddLocation';
+
+import { getLocationFromQuery } from '../../server-store/queries/queries';
+import { IGetAllArgs } from '../../server-store/queries/useGetNotifications';
+import { IWaterData } from '../../types/data-types';
+
+import ModalComponent from "../modal/modal.component";
 
 const Alert = ({
   isSafe,
@@ -17,7 +20,8 @@ const Alert = ({
   isSafe: boolean;
   currentWaterData: IWaterData;
 }) => {
-  const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
+  const [realTimeData, setRealTimeData] = useState<IWaterData[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const router = useRouter();
   const { location } = router.query;
@@ -28,25 +32,20 @@ const Alert = ({
 
   const getRealTimeData = async () => {
     await addLocation(queryLocation, {
-      onSuccess: (dt) => setRealTimeData(dt),
+      onSuccess: (dt:any) => {
+        setRealTimeData([dt]); 
+        setIsModalOpen(true);
+      },
     });
   };
-
-  console.log(realTimeData);
-
-  //NOTE: Instructions for Ginika
-  //Pass realTimeData as a prop into modal component
-  //Give it the same type as i did for waterParameters component waterQualityData and then map through it do display the data
-  //Use WaterParameters component as a guide
 
   return (
     <AlertContainer>
       <p>
-        Report at{" "}
-        {dayjs(currentWaterData?.created_at).format("MM/DD/YYYY HH:mm")}
+        Report at {dayjs(currentWaterData?.created_at).format('MM/DD/YYYY HH:mm')}
       </p>
       <h1>ALERT</h1>
-      <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
+      <p style={{ color: isSafe ? 'rgba(4, 155, 1, 1)' : 'rgb(226, 3, 3)' }}>
         {!isSafe ? (
           <>
             pH is not within acceptable range
@@ -80,8 +79,14 @@ const Alert = ({
       <button disabled={!location} onClick={getRealTimeData}>
         Get Real-time Data
       </button>
+      <ModalComponent
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        waterQualityData={realTimeData}
+      />
     </AlertContainer>
   );
 };
 
 export default Alert;
+
