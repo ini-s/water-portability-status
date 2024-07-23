@@ -3,7 +3,6 @@ import dayjs from "dayjs";
 import { ICategory, IWaterData } from "../types/data-types";
 
 export const mapApiDataToCategories = (data: IWaterData[]): ICategory[] => {
-
   const categories: ICategory[] = [
     {
       category: "physical",
@@ -110,9 +109,6 @@ export const mapApiDataToCategories = (data: IWaterData[]): ICategory[] => {
       ],
     },
   ];
-
-  // Debug: Check the resulting categories structure
-  console.log("Mapped categories:", categories);
 
   return categories;
 };
