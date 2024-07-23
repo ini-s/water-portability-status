@@ -13,7 +13,7 @@ const getRealTimeData = async ({
     start_date,
     end_date,
   };
-  const response = await api.get("/export", { params });
+  const response = await api.get("/water-quality-data/export", { params });
 
   return response.data.data;
 };
@@ -29,6 +29,7 @@ const useGetRealTimeData = ({
     {
       keepPreviousData: true,
       retry: false,
+      staleTime: 1000 * 60 * 2 ,
     }
   );
 };
