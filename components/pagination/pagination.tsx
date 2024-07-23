@@ -56,6 +56,9 @@ const Pagination = ({
       },
     });
   };
+  
+  const handleFirstPage = () => handlePageChange(1);
+  const handleLastPage = () => handlePageChange(noOfPages);
 
   const handlePrevious = () => {
     if (currentPage > 1) {
@@ -78,11 +81,9 @@ const Pagination = ({
   return (
     <PaginationBox>
       <ul>
-        {
-          <li>
-            <FaAngleDoubleLeft />
-          </li> /*when clicked, setCurrentPage(1) */
-        }
+        <li onClick={handleFirstPage}>
+          <FaAngleDoubleLeft />
+        </li>
         <li onClick={handlePrevious}>
           <FaAngleLeft />
         </li>
@@ -95,11 +96,9 @@ const Pagination = ({
         <li onClick={handleNext}>
           <FaAngleRight />
         </li>
-        {
-          <li>
-            <FaAngleDoubleRight />
-          </li> /* when clicked, setCurrentPage(noOfPages) */
-        }
+        <li onClick={handleLastPage}>
+          <FaAngleDoubleRight />
+        </li>
       </ul>
     </PaginationBox>
   );
