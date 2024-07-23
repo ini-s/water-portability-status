@@ -1,4 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+
+const fadeInOut = keyframes`
+  0% {
+    opacity: 0;
+    transform: translateY(-0.625rem);
+  }
+  50% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100%{
+    opacity: 0;
+    transform: translateY(-0.625rem);
+  }
+ 
+`;
 
 export const NotificationsContainer = styled.div`
   width: 100%;
@@ -14,6 +30,12 @@ export const Table = styled.table`
   width: 87%;
   margin: auto;
   border-spacing: 0;
+
+  /* & > thead{
+    & > tr{
+      display: flex;
+    }
+  } */
 
   th,
   td {
@@ -31,6 +53,7 @@ export const Table = styled.table`
     background-color: rgb(var(--color-light-grey));
     text-transform: uppercase;
     font-weight: 400;
+
   }
 
   td {
@@ -54,14 +77,15 @@ export const NotificationHeader = styled.div`
 
     @media (max-width: 28.125em) {
       padding-left: 0;
-      font-size: 1rem;
-      letter-spacing: 0.19rem;
+      font-size: 1.3rem;
+      letter-spacing: 0.13rem;
     }
 
     @media (max-width: 43.75em) and (min-width: 28.1875em) {
       padding-left: 0;
       font-size: 1.5rem;
       letter-spacing: 0.3rem;
+
     }
     @media (max-width: 66.25em) and (min-width: 43.8125em) {
       padding-left: 0;
@@ -72,8 +96,7 @@ export const NotificationHeader = styled.div`
 export const FilterButton = styled.div`
   display: flex;
   flex-direction: column;
-  margin: .3125rem 0;
-  
+  margin: 0.3125rem 0;
 
   @media (max-width: 43.75em) {
     display: flex;
@@ -85,18 +108,17 @@ export const FilterButton = styled.div`
     color: rgb(var(--color-white));
     border: none;
     border-radius: 0.59rem;
-    padding: 0.08rem 0.35rem;
+    padding: 0.08rem 0.35rem ;
     text-transform: capitalize;
-    cursor: pointer;
     font-size: 0.375rem;
     font-weight: 800;
     text-transform: capitalize;
-    margin-bottom: .28rem;
+    margin-bottom: 0.28rem;
 
     @media (max-width: 43.75em) {
-      padding: 0.049rem 0.25rem;
-      font-size: .1875rem;
-      margin-bottom: .15rem;
+      padding: 0.05rem 0.2rem ;
+      font-size: 0.14rem;
+      margin-bottom: 0.15rem;
     }
 
     &:hover {
@@ -109,13 +131,23 @@ export const FilterBox = styled.form`
   align-items: center;
   text-align: right;
   margin-left: auto;
-  margin-bottom: .125rem;
+  margin-bottom: 0.125rem;
   flex-direction: column;
-
-  
 
   & > p {
     color: rgb(var(--color-red));
+    border: 0.0625rem solid rgb(var(--color-red));
+    border-radius: 0.3125rem;
+    padding: 0.1875rem;
+    margin-bottom: 0.0625rem;
+    font-size: 0.7rem;
+    text-align: center;
+    animation: ${fadeInOut} 4.5s ease-in-out;
+
+    @media (max-width: 43.75em) {
+      font-size: 0.4rem;
+      padding: 0.125rem;
+    }
   }
 
   & > div {
@@ -145,22 +177,22 @@ export const FilterBox = styled.form`
       font-weight: 800;
       height: 1.4375rem;
       width: 3.75rem;
-      padding: 0 0.17rem;
+      padding: 0 0.1rem 0 ;
 
       @media (max-width: 20em) {
         width: 1.9rem;
         height: 0.6rem;
         font-size: 0.18rem;
         border-radius: 0.2rem;
-        padding: 0 0.1rem;
+        padding: 0 0.1rem 0 ;
       }
 
       @media (max-width: 43.75em) and (min-width: 20.0625em) {
         width: 2.0838rem;
-        height: 0.7987rem;
-        font-size: 0.24rem;
+        height: 0.68rem;
+        font-size: 0.2rem;
         border-radius: 0.2rem;
-        padding: 0 0.015rem;
+        padding: 0 0.08rem  0;
       }
     }
 
@@ -211,6 +243,16 @@ export const PaginationBox = styled.div`
       align-items: center;
       padding: 0.5rem 1rem;
       font-size: 0.6875rem;
+
+      &:visited{
+        background-color: #fff;
+      }
+
+      &:active{
+
+        background-color: #fff;
+      }
+
 
       @media (max-width: 21.25em) {
         font-size: 0.25rem;
