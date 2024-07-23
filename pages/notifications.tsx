@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
@@ -99,6 +99,16 @@ const NotificationsPage: NextPageWithLayout = () => {
 
     setDateRange({ startDate: "", endDate: "" });
   };
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 3500);
+
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
 
   return (
     <NotificationsContainer>
