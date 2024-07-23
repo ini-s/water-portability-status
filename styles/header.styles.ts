@@ -1,36 +1,47 @@
 import styled from "styled-components";
 
-export const HeaderWrapper = styled.header`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-`;
-export const LogoContainer = styled.div`
-  display: flex;
-  align-items: center;
+export const HeaderWrapper = styled.header``;
 
-  > h3 {
-    text-transform: uppercase;
-    font-weight: 700;
-    font-size: 2rem;
+export const LogoContainer = styled.div`
+  & > p {
+    font-size: 0.5625rem;
+  }
+
+  & > div {
+    display: flex;
+    align-items: center;
+
+    & > h3 {
+      text-transform: uppercase;
+      font-weight: 700;
+      font-size: 2rem;
+    }
 
     @media (max-width: 62.5em) {
-      font-size: 0.9375rem;
+      & > h3 {
+        font-size: 0.9375rem;
+      }
+    }
+  }
+
+  @media screen and (min-width: 62.5em) {
+    & > p {
+      font-size: 1rem;
     }
   }
 `;
+
 export const Navbar = styled.nav`
   display: flex;
-  flex-direction: column;
-  padding-left: 3.1rem;
-  padding-top: 1.8rem;
-  padding-bottom: 1rem;
+  align-items: center;
+  padding: 1.8rem 3.1rem 1rem;
+  width: 100%;
 
   @media (max-width: 62.5em) {
-    padding: 0.5rem 1.5rem;
+    padding: 1rem 1.25rem;
   }
 
-  > h5 {
+  & > h5 {
     font-weight: 300;
     font-size: 1.0938rem;
     text-transform: capitalize;
@@ -57,24 +68,22 @@ export const Logo = styled.div`
   }
 `;
 
-export const Navlink = styled.div`
+export const NavLink = styled.div`
   display: flex;
   align-items: center;
   margin-left: auto;
 
   & > ul {
     display: flex;
+    justify-content: space-between;
     align-items: center;
     gap: 1.4rem;
-    margin-right: 2rem;
 
     @media (max-width: 18.125em) {
-      gap: 0.38em;
-      margin-right: 1rem;
+      gap: 0.38rem;
     }
     @media (max-width: 62.5em) and (min-width: 18.1875em) {
       gap: 0.65rem;
-      margin-right: 1rem;
     }
 
     & > li {
@@ -87,7 +96,7 @@ export const Navlink = styled.div`
         font-size: 0.75rem;
       }
 
-      > a {
+      & > a {
         &:visited {
           color: rgb(var(--color-black));
         }
@@ -119,20 +128,20 @@ export const Button = styled.button`
   background-color: rgb(var(--color-black));
   background-color: rgb(var(--color-black));
   color: rgb(var(--color-white));
-  border-radius: 1.3rem;
-  width: 9.5rem;
-  padding-top: 0.35rem;
-  padding-bottom: 0.35rem;
+  border-radius: 0.5rem;
+  width: fit-content;
+  padding: 0.4rem 0.5rem;
   font-size: 0.56rem;
   font-size: 1rem;
   border: none;
+  text-transform: uppercase;
 
   &:hover {
     opacity: 0.8;
   }
 
   @media (max-width: 25em) {
-    width: 4.9rem;
+    width: fit-content;
     font-size: 0.49rem;
     border-radius: 1.9rem;
     padding-top: 0.2rem;
@@ -145,4 +154,9 @@ export const Button = styled.button`
     padding-bottom: 0.25rem;
     border-radius: 1.9rem;
   }
+`;
+
+export const DateRangeBox = styled.div`
+  position: absolute;
+  top: 3rem;
 `;
