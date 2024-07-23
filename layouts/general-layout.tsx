@@ -12,7 +12,6 @@ interface IGeneralLayoutProps {
 
 const GeneralLayout: FC<IGeneralLayoutProps> = ({
   children,
-  exportData,
   removeBtn,
   pageTitle,
 }) => {
@@ -27,7 +26,7 @@ const GeneralLayout: FC<IGeneralLayoutProps> = ({
         /> */}
       </Head>
 
-      <Header exportData={exportData} removeBtn={removeBtn} />
+      <Header removeBtn={removeBtn} />
 
       <main>{children}</main>
     </>
