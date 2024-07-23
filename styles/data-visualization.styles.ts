@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const DataVisualizationContainer = styled.div`
-  > div {
+  & > div {
     display: flex;
   }
 `;
@@ -25,7 +25,7 @@ export const CategorySelectionButtons = styled.div`
     padding-left: 6rem;
   }
 
-  > button {
+  & > button {
     width: 9.3225rem;
     height: 3.9444rem;
     background-color: #a9faff;
@@ -115,7 +115,7 @@ export const PropertySelectionButtons = styled.div`
     height: 14rem;
   }
 
-  > button {
+  & > button {
     border: none;
     width: 5.9375rem;
     height: 3.125rem;
@@ -151,7 +151,7 @@ export const GraphBody = styled.div`
 export const Softsensor = styled.div`
   width: 90%;
   margin: auto;
-  > button {
+  & > button {
     border: none;
     background-color: rgb(var(--color-white));
     color: rgb(var(--color-dark-blue));
