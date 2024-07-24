@@ -7,6 +7,8 @@ import {
 } from "react";
 import { useRouter } from "next/router";
 
+import styled from "styled-components";
+
 import { PaginationBox } from "../../styles/notifications.styles";
 
 import {
@@ -15,6 +17,12 @@ import {
   FaAngleDoubleRight,
   FaAngleRight,
 } from "react-icons/fa";
+
+const PageNumber = styled.li<{ active: boolean }>`
+  background-color: ${(props) =>
+    props.active ? "#fff" : "rgb(var(--color-light-grey)"};
+  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+`;
 
 const Pagination = ({
   size,
@@ -56,7 +64,7 @@ const Pagination = ({
       },
     });
   };
-  
+
   const handleFirstPage = () => handlePageChange(1);
   const handleLastPage = () => handlePageChange(noOfPages);
 
@@ -88,9 +96,12 @@ const Pagination = ({
           <FaAngleLeft />
         </li>
         {pageRange.map((no) => (
-          <li key={no} onClick={() => handlePageChange(no)}>
+          <PageNumber
+            key={no}
+            onClick={() => handlePageChange(no)}
+            active={currentPage === no}>
             {no}
-          </li>
+          </PageNumber>
         ))}
         <li>1-{noOfPages}</li>
         <li onClick={handleNext}>
