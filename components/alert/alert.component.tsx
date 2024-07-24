@@ -32,13 +32,6 @@ const Alert = ({
     });
   };
 
-  console.log(realTimeData);
-
-  //NOTE: Instructions for Ginika
-  //Pass realTimeData as a prop into modal component
-  //Give it the same type as i did for waterParameters component waterQualityData and then map through it do display the data
-  //Use WaterParameters component as a guide
-
   return (
     <AlertContainer>
       <p>
