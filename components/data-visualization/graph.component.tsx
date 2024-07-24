@@ -10,12 +10,16 @@ import {
   defaults,
   Chart as ChartJS,
   Ticks,
+  Chart,
+  Filler,
 } from "chart.js";
 
 import { GraphContainer } from "../../styles/graph.styles";
 
 import { IPredictionLogs, PropertyData } from "../../types/data-types";
 import { type } from "os";
+
+Chart.register(Filler);
 
 defaults.maintainAspectRatio = false;
 defaults.responsive = true;
@@ -51,6 +55,7 @@ const Graph = ({
     }
   });
 
+
   return (
     <GraphContainer>
       <Line
@@ -61,7 +66,7 @@ const Graph = ({
               borderColor: "rgba(0, 153, 255, 0.5)",
               pointBackgroundColor: "rgba(0, 153, 255, 0.5)",
               borderWidth: 2,
-              fill: true,
+              // fill: true,
               label: data.subtitle,
               data: data.values,
             },

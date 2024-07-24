@@ -24,7 +24,7 @@ const useGetWaterQualityData = ({
   return useQuery(
     ["GET_WATER_QUALITY_DATA", location, size],
     () => getWaterQualityData({ location, size }),
-    { keepPreviousData: true, retry: false }
+    { keepPreviousData: true, retry: false, staleTime: 1000 * 60 * 2 }
   );
 };
 

@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { FaBell } from "react-icons/fa";
 import { useRouter } from "next/router";
+import { ChangeEvent, useEffect, useState } from "react";
 
 import {
   HeaderWrapper,
@@ -9,26 +10,26 @@ import {
   Button,
   Navbar,
   LogoContainer,
-  Navlink,
+  NavLink,
   NotificationButton,
 } from "../../styles/header.styles";
 
 import ExportData from "../export-data/export-data";
 
 import { getLocationFromQuery } from "../../server-store/queries/queries";
-import { useEffect, useState } from "react";
 
 interface IHeaderProps {
-  exportData?: boolean;
   removeBtn?: boolean;
 }
 
-const Header = ({ exportData, removeBtn }: IHeaderProps) => {
+const Header = ({ removeBtn }: IHeaderProps) => {
   const [locationText, setLocationText] = useState("");
+  const [exportData, setExportData] = useState(false);
 
   const router = useRouter();
   const { query } = router;
   const queryLocation = getLocationFromQuery(query.location);
+
 
   const showDataVisualization = () => {
     router.push({
@@ -47,50 +48,58 @@ const Header = ({ exportData, removeBtn }: IHeaderProps) => {
   useEffect(() => {
     if (query && queryLocation === "iwaya") {
       setLocationText("iwaya");
+    } else {
+      setLocationText("bariga");
     }
-    setLocationText("bariga");
-  }, [query, queryLocation]);
+    if (query.dataVisualization) setExportData(true);
+    else {
+      setExportData(false);
+    }
+  }, [query, queryLocation, query.dataVisualization]);
 
   return (
     <HeaderWrapper>
       <Navbar>
         <LogoContainer>
-          <h3>{locationText ?? ""}</h3>
-          {
-            <Logo>
-              <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
-            </Logo>
-          }
+          <div>
+            <h3>{locationText ?? ""}</h3>
+            {
+              <Logo>
+                <Image src="/locationpin.png" alt="logo" fill sizes="100%" />
+              </Logo>
+            }
+          </div>
+          <p>water status</p>
         </LogoContainer>
-        <h5>water status</h5>
-      </Navbar>
 
-      <Navlink>
-        <ul>
-          <li>
-            <NotificationButton>
-              <button onClick={goToNotifications}>
-                <FaBell />
-              </button>
-            </NotificationButton>
-          </li>
-          <li>
-            <Link href="/">Home</Link>
-          </li>
-          <li>
-            {!exportData ? (
-              <Button onClick={showDataVisualization}>
-                Data Visualization
-              </Button>
-            ) : (
-              <ExportData
-                // data={categoriesData}
-                fileName="water-probability-status"
-              />
+        <NavLink>
+          <ul>
+            <li>
+              <NotificationButton>
+                <button onClick={goToNotifications}>
+                  <FaBell />
+                </button>
+              </NotificationButton>
+            </li>
+            <li>
+              <Link href="/">Home</Link>
+            </li>
+            {!removeBtn && (
+              <li>
+                {!exportData ? (
+                  <Button onClick={showDataVisualization}>
+                    Data Visualization
+                  </Button>
+                ) : (
+                  <ExportData
+                    fileName="water-probability-status"
+                  />
+                )}
+              </li>
             )}
-          </li>
-        </ul>
-      </Navlink>
+          </ul>
+        </NavLink>
+      </Navbar>
     </HeaderWrapper>
   );
 };
