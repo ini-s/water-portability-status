@@ -16,7 +16,11 @@ const SpinnerWrapper = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 80vh;
+  height: 20vh;
+
+  @media(max-width: 37.5em){
+    height: 15vh;
+  }
 
   &>p{
     font-weight: 700;
