@@ -136,17 +136,11 @@ export const FilterBox = styled.form`
 
   & > p {
     color: rgb(var(--color-red));
-    border: 0.0625rem solid rgb(var(--color-red));
-    border-radius: 0.3125rem;
-    padding: 0.1875rem;
-    margin-bottom: 0.0625rem;
     font-size: 0.7rem;
-    text-align: center;
     animation: ${fadeInOut} 4.5s ease-in-out;
 
     @media (max-width: 43.75em) {
       font-size: 0.4rem;
-      padding: 0.125rem;
     }
   }
 
@@ -243,6 +237,8 @@ export const PaginationBox = styled.div`
       align-items: center;
       padding: 0.5rem 1rem;
       font-size: 0.6875rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
 
       &:visited{
         background-color: #fff;
