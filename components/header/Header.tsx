@@ -17,7 +17,6 @@ import {
 import ExportData from "../export-data/export-data";
 
 import { getLocationFromQuery } from "../../server-store/queries/queries";
-import useGetRealTimeData from "../../server-store/queries/useGetRealTimeData";
 
 interface IHeaderProps {
   removeBtn?: boolean;
