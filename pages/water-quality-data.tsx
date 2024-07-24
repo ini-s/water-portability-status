@@ -29,11 +29,6 @@ const LocationPage: NextPageWithLayout = () => {
 
   const waterQualityData = data || [];
 
-  // const waterData = useMemo(
-  //   () => (data && data.length > 0 ? data[0] : null),
-  //   [data]
-  // );
-
   const waterData = data && data.length > 0 ? data[0] : null;
 
   useEffect(() => {
