@@ -7,22 +7,18 @@ export const DataVisualizationContainer = styled.div`
 `;
 
 export const CategorySelectionButtons = styled.div`
-  padding-top: 0.9375rem;
-  padding-left: 12.5rem;
+  padding: 0.9375rem 0 0 12.5rem;
 
   @media (max-width: 25em) {
-    padding-left: 4.6rem;
-    padding-top: 1.5rem;
+    padding: 1.5rem 0 0 4.6rem;
   }
 
   @media (max-width: 37.5625em) and (min-width: 25.0625em) {
-    padding-top: 1.5rem;
-    padding-left: 6.5rem;
+    padding: 1.5rem 0 0 6.5rem;
   }
 
   @media (max-width: 62.5em) and (min-width: 25em) {
-    padding-top: 1.5rem;
-    padding-left: 6rem;
+    padding: 1.5rem 0 0 6rem;
   }
 
   & > button {
@@ -64,15 +60,15 @@ export const Title = styled.h1`
   @media (max-width: 25em) {
     font-size: 0.5rem;
     padding-left: 5rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.2rem;
+    margin: 0.5rem 0 0.2rem;
+    
   }
 
   @media (max-width: 62.5em) and (min-width: 25.0625em) {
     font-size: 0.7rem;
     padding-left: 7rem;
-    margin-top: 0.7rem;
-    margin-bottom: 0.4rem;
+    margin: 0.7rem 0 0.4rem;
+    
   }
 `;
 export const SubTitle = styled.p`
@@ -170,7 +166,7 @@ export const Softsensor = styled.div`
     @media (max-width: 43.125em) and (min-width: 30.625em) {
       font-size: 0.625rem;
     }
-    
+
     &:hover {
       text-decoration: underline;
       opacity: 0.8;
