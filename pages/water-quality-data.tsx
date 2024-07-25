@@ -15,6 +15,8 @@ import { getLocationFromQuery } from "../server-store/queries/queries";
 import DataVisualization from "../components/data-visualization/data-visualization.component";
 import Alert from "../components/alert/alert.component";
 
+import { WaterPortabilityScreen } from "../styles/water-quality-data.styles";
+
 const LocationPage: NextPageWithLayout = () => {
   const [isSafe, setIsSafe] = useState(false);
 
@@ -44,17 +46,17 @@ const LocationPage: NextPageWithLayout = () => {
   const isPortable = waterData?.prediction_log.potability ?? false;
 
   return (
-    <div>
+    <WaterPortabilityScreen>
       {!isDataVisualization ? (
         <SafetyScreen isSafe={isPortable} />
       ) : (
         <DataVisualization waterData={waterQualityData} />
       )}
       <div>
-        <WaterParameters waterQualityData={waterQualityData} />
         <Alert isSafe={isPortable} currentWaterData={waterData} />
+        <WaterParameters waterQualityData={waterQualityData} />
       </div>
-    </div>
+    </WaterPortabilityScreen>
   );
 };
 
