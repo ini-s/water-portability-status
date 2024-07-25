@@ -1,4 +1,4 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
@@ -10,6 +10,8 @@ import {
   FilterBox,
   NotificationsContainer,
   Table,
+  NotificationHeader,
+  FilterButton,
 } from "../styles/notifications.styles";
 
 import Pagination from "../components/pagination/pagination";
@@ -97,72 +99,95 @@ const NotificationsPage: NextPageWithLayout = () => {
 
     setDateRange({ startDate: "", endDate: "" });
   };
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
+        setErrorMessage("");
+      }, 3500);
 
-  if (isFetching || isInitialLoading) {
-    return <Spinner />;
-  }
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage]);
+
 
   return (
     <NotificationsContainer>
-      <h1>Notification</h1>
-      <FilterBox>
-        <div>
-          <input
-            type="date"
-            id="startDate"
-            name="startDate"
-            onChange={handleDateChange}
-            value={dateRange.startDate}
-          />
+      <NotificationHeader>
+        <h1>Notification</h1>
+        <FilterBox>
+          <div>
+            <p>Filter by Date Range</p>
+            <input
+              type="date"
+              id="startDate"
+              name="startDate"
+              onChange={handleDateChange}
+              value={dateRange.startDate}
+            />
+            <p>-</p>
+            <input
+              type="date"
+              id="endDate"
+              name="endDate"
+              onChange={handleDateChange}
+              value={dateRange.endDate}
+            />
+            <FilterButton>
+              <button
+                disabled={dateRange.startDate === ""}
+                onClick={filterByDateRange}>
+                filter
+              </button>
+              <button type="button" onClick={clearFilters}>
+                clear filters
+              </button>
+            </FilterButton>
+          </div>
+          {errorMessage && <p>{errorMessage}</p>}
+        </FilterBox>
+      </NotificationHeader>
 
-          <input
-            type="date"
-            id="endDate"
-            name="endDate"
-            onChange={handleDateChange}
-            value={dateRange.endDate}
-          />
-
-          <button
-            disabled={dateRange.startDate === ""}
-            onClick={filterByDateRange}
-          >
-            filter by date range
-          </button>
-          <button type="button" onClick={clearFilters}>
-            clear filters
-          </button>
-        </div>
-        {errorMessage && <p>{errorMessage}</p>}
-      </FilterBox>
-      {notifications?.length > 0 ? (
-        <>
-          <Table>
-            <thead>
-              <tr>
-                <th>date & time</th>
-                <th>event description</th>
+      <Table>
+        <thead>
+          <tr>
+            <th>date & time</th>
+            <th>event description</th>
+          </tr>
+        </thead>
+        {isFetching || isInitialLoading ? (
+          <tbody>
+            <tr>
+              <td colSpan={2} style={{ textAlign: "center" }}>
+                <Spinner />
+              </td>
+            </tr>
+          </tbody>
+        ) : notifications?.length > 0 ? (
+          <tbody>
+            {notifications.map((el, index) => (
+              <tr key={index}>
+                <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
+                <td>{el.message}</td>
               </tr>
-            </thead>
-            <tbody>
-              {notifications?.length > 0 &&
-                notifications.map((el, index) => (
-                  <tr key={index}>
-                    <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
-                    <td>{el.message}</td>
-                  </tr>
-                ))}
-            </tbody>
-          </Table>
-          <Pagination
-            size={data?.total_count ?? 0}
-            postsPerPage={size}
-            currentPage={currentPage}
-            setCurrentPage={setCurrentPage}
-          />
-        </>
-      ) : (
-        <NoDataComponent />
+            ))}
+          </tbody>
+        ) : (
+          <tbody>
+            <tr>
+              <td colSpan={2} style={{ textAlign: "center" }}>
+                <NoDataComponent />
+              </td>
+            </tr>
+          </tbody>
+        )}
+      </Table>
+      {notifications?.length > 0 && (
+        <Pagination
+          size={data?.total_count ?? 0}
+          postsPerPage={size}
+          currentPage={currentPage}
+          setCurrentPage={setCurrentPage}
+        />
       )}
     </NotificationsContainer>
   );

@@ -10,6 +10,8 @@ import { getLocationFromQuery } from "../../server-store/queries/queries";
 import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
 import { IWaterData } from "../../types/data-types";
 
+import ModalComponent from "../modal/modal.component";
+
 const Alert = ({
   isSafe,
   currentWaterData,
@@ -17,8 +19,9 @@ const Alert = ({
   isSafe: boolean;
   currentWaterData: IWaterData;
 }) => {
-  const [realTimeData, setRealTimeData] = useState<IGetAllArgs | null>();
-
+  const [realTimeData, setRealTimeData] = useState<IWaterData[]>([]);
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isLoadingData, setIsLoadingData] = useState(false);
   const router = useRouter();
   const { location } = router.query;
 
@@ -27,9 +30,17 @@ const Alert = ({
   const { mutateAsync: addLocation, isLoading, error } = useAddLocation();
 
   const getRealTimeData = async () => {
-    await addLocation(queryLocation, {
-      onSuccess: (dt) => setRealTimeData(dt),
-    });
+    setIsModalOpen(true);
+    setIsLoadingData(true);
+
+    try {
+      const dt: any = await addLocation(queryLocation);
+      setRealTimeData([dt]);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoadingData(false);
+    }
   };
 
   return (
@@ -73,6 +84,12 @@ const Alert = ({
       <button disabled={!location} onClick={getRealTimeData}>
         Get Real-time Data
       </button>
+      <ModalComponent
+        isOpen={isModalOpen}
+        onRequestClose={() => setIsModalOpen(false)}
+        waterQualityData={realTimeData}
+        isLoading={isLoadingData}
+      />
     </AlertContainer>
   );
 };
