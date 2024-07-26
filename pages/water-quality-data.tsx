@@ -16,6 +16,8 @@ import DataVisualization from "../components/data-visualization/data-visualizati
 import Alert from "../components/alert/alert.component";
 
 import { WaterPortabilityScreen } from "../styles/water-quality-data.styles";
+import NoDataComponent from "../components/no-data-component/no-data-component";
+import Spinner from "../components/spinner-component/spinner-component";
 
 const LocationPage: NextPageWithLayout = () => {
   const [isSafe, setIsSafe] = useState(false);
@@ -47,15 +49,23 @@ const LocationPage: NextPageWithLayout = () => {
 
   return (
     <WaterPortabilityScreen>
-      {!isDataVisualization ? (
-        <SafetyScreen isSafe={isPortable} />
+      {isFetching || isInitialLoading ? (
+        <Spinner />
+      ) : data?.length > 0 ? (
+        <>
+          {!isDataVisualization ? (
+            <SafetyScreen isSafe={isPortable} />
+          ) : (
+            <DataVisualization waterData={waterQualityData} />
+          )}
+          <div>
+            <Alert isSafe={isPortable} currentWaterData={waterData} />
+            <WaterParameters waterQualityData={waterQualityData} />
+          </div>
+        </>
       ) : (
-        <DataVisualization waterData={waterQualityData} />
+        <NoDataComponent />
       )}
-      <div>
-        <Alert isSafe={isPortable} currentWaterData={waterData} />
-        <WaterParameters waterQualityData={waterQualityData} />
-      </div>
     </WaterPortabilityScreen>
   );
 };
