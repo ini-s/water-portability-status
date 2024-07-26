@@ -8,7 +8,9 @@ export const WaterPortabilityScreen = styled.div`
 `;
 
 export const FlexContainer = styled.div`
-  @media screen and (min-width: 60.5625em) {
+  @media screen and (min-width: 60.5625em) 
+  {
+    margin-top: 2rem;
     width: 100%;
     display: grid;
     grid-template-columns: 1.6fr 1fr;
