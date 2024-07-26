@@ -31,8 +31,10 @@ const LocationPage: NextPageWithLayout = () => {
   const queryLocation = getLocationFromQuery(query.location);
   const size = 8;
 
-  const { data, isInitialLoading, isFetching, isPreviousData } =
-    useGetWaterQualityData({ location: queryLocation, size });
+  const { data, isInitialLoading, isFetching } = useGetWaterQualityData({
+    location: queryLocation,
+    size,
+  });
 
   const waterQualityData = data || [];
 
