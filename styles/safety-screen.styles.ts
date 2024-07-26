@@ -1,120 +1,85 @@
 import styled from "styled-components";
 
-export const SafeScreenContainer = styled.div`
+export const SafeScreenContainer = styled.section`
+  display: flex;
   align-items: center;
   justify-content: center;
-  text-align: left;
-  padding: 3rem;
-  display: flex;
+  padding: 0 2.5rem;
+  margin-block: 3.4rem;
 
-  h1 {
-    //margin-top: 2.5rem;
-    line-height: 4.5rem;
-    font-family: "Inter", sans-serif;
-    font-size: 3rem;
-    font-weight: 700;
+  @media screen and (min-width: 47.9375em) {
+    margin-block: 4.2rem;
   }
 
-  h2 {
-    //margin-top: 0.5rem;
-    //margin-right: 14rem;
-    //text-align: center;
-    font-family: "Inter", sans-serif;
-    font-size: 3rem;
-    font-weight: 400;
-  }
-  
-
-  @media (max-width: 768px) {
-    h1 {
-      font-size: 2rem;
-      font-weight: 700;
-      padding-bottom: 0rem;
-      width: 100%;
-      margin-left: 0.3rem;
-      line-height: 1.5rem;
-      //padding-top: -5em;
-      
-    }
-    h2 {
-      padding-bottom: 0.8rem;
-      font-size: 2rem;
-      margin-left: 2.7rem;
-      font-weight: 400;
-    }
-    
-  }
-  @media (max-width: 480px) {
-      h1 {
-        font-size: 1.5rem;
-        margin-left: 0.2rem;
-        //padding-left: 0%.2rem;
-      }
-      h2 {
-        font-size: 1.5rem;
-        //padding-left: 10rem;
-       // align-items: left;
-      }
-  }
-  @media (max-width: 1400px) {
-    h2 {
-          padding-left: 1px;
-          margin-left: 0.001rem;
-    }
-  }
-  @media (max-width: 340px) {
-    h1 {
-      font-size: 1.2rem;
-      font-weight: 700;
-      padding-bottom: 0rem;
-      margin-left: 2.8rem;
-      padding-right: 1.5rem;
-      //line-height: 1.5rem;
-      //padding-top: -5em;
-      
-    }
-    h2 {
-      padding-bottom: 0.5rem;
-      font-size: 1.2rem;
-      margin-left: 1.5rem;
-      font-weight: 400;
-    }
-  }
-  @media (max-width: 290px) {
-    h1 {
-      font-size: 1rem;
-      font-weight: 700;
-      padding-bottom: 0rem;
-      margin-left: 0.5rem;
-      padding-right: 0.5rem;
-      //line-height: 1.5rem;
-      //padding-top: -5em;
-      
-    }
-    h2 {
-      padding-bottom: 0.5rem;
-      font-size: 1rem;
-      margin-left: 0.5rem;
-      padding-right: 0.5rem;
-      font-weight: 400;
-    }
+  @media screen and (min-width: 47.9375em) {
+    margin-block: 6.25rem;
   }
 `;
+
 export const ImageContainer = styled.div`
-  max-width: 150px; /* Set a maximum width for the image container */
-  margin-top: 0rem;
-  margin-left: 0.1rem;
-  justify-content: center;
+  position: relative;
+  height: 7.5rem;
+  width: 7rem;
 
-  img {
-    width: 150%; /* Ensure the image fits within the container */
-    height: auto;
+  & > img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  @media screen and (min-width: 25em) {
+    height: 9.9375rem;
+    width: 10.1819rem;
+  }
+
+  @media screen and (min-width: 47.9375em) {
+    height: 14rem;
+    width: 13rem;
+  }
+
+  @media screen and (min-width: 75em) {
+    height: 21.875rem;
+    width: 23.4375rem;
   }
 `;
+
 export const TextContainer = styled.div`
-  display: flex;
-  flex-direction: column;
-  align-items: left;
-  justify-content: center;
-  
+  & > h1 {
+    font-size: 1.25rem;
+    font-weight: 400;
+    padding-bottom: 0.5rem;
+  }
+
+  & > p {
+    font-weight: 700;
+    font-size: 1.25rem;
+  }
+
+  @media screen and (min-width: 25em) {
+    & > h1,
+    & > p {
+      font-size: 1.4rem;
+    }
+  }
+
+  @media screen and (min-width: 47.9375em) {
+    & > h1,
+    & > p {
+      font-size: 2rem;
+    }
+  }
+
+  @media screen and (min-width: 75em) {
+    & > h1,
+    & > p {
+      font-size: 2.5rem;
+    }
+  }
+
+  @media screen and (min-width: 90em) {
+    & > h1,
+    & > p {
+      font-size: 3rem;
+    }
+  }
 `;

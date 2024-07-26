@@ -3,9 +3,10 @@ import Image from "next/image";
 import dayjs from "dayjs";
 
 import {
+  Table,
   WaterParametersContainer,
-  CombinedContainer,
 } from "../../styles/water-parameters.styles";
+
 import { IWaterData } from "../../types/data-types";
 
 interface IWaterParameterProps {
@@ -16,33 +17,17 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
   waterQualityData,
 }) => {
   return (
-    <CombinedContainer>
-      <h2>WATER PARAMETERS</h2>
-      <WaterParametersContainer>
-        <table>
+    <WaterParametersContainer>
+      <p>WATER PARAMETERS</p>
+      <div>
+        <Table>
           <thead>
             <tr>
               <th>DATE/TIME</th>
-              <th>
-                TEMP
-                <br />
-                (°C)
-              </th>
-              <th>
-                TDS
-                <br />
-                (ppm)
-              </th>
-              <th>
-                SALINITY
-                <br />
-                (ppm)
-              </th>
-              <th>
-                EC
-                <br />
-                (uS/cm)
-              </th>
+              <th>TEMP (°C)</th>
+              <th>TDS (ppm)</th>
+              <th>SALINITY (ppm)</th>
+              <th>EC (uS/cm)</th>
               <th>SG</th>
               <th>pH</th>
               <th>STATUS</th>
@@ -81,9 +66,9 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
                 </tr>
               ))}
           </tbody>
-        </table>
-      </WaterParametersContainer>
-    </CombinedContainer>
+        </Table>
+      </div>
+    </WaterParametersContainer>
   );
 };
 

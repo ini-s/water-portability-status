@@ -11,8 +11,8 @@ const SafetyScreen = ({ isSafe }: { isSafe: boolean }) => {
   return (
     <SafeScreenContainer>
       <TextContainer>
-        <h2>This Water is </h2>
-        <h1>{!isSafe ? " Unsafe for Use" : " Safe for Use"}</h1>
+        <h1>This Water is </h1>
+        <p>{!isSafe ? " Unsafe for Use" : " Safe for Use"}</p>
       </TextContainer>
 
       <ImageContainer>

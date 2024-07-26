@@ -18,10 +18,10 @@ import {
   FaAngleRight,
 } from "react-icons/fa";
 
-const PageNumber = styled.li<{ active: boolean }>`
+const PageNumber = styled.li<{ $active: boolean }>`
   background-color: ${(props) =>
-    props.active ? "#fff" : "rgb(var(--color-light-grey)"};
-  font-weight: ${(props) => (props.active ? "bold" : "normal")};
+    props.$active ? "#fff" : "rgb(var(--color-light-grey)"};
+  font-weight: ${(props) => (props.$active ? "bold" : "normal")};
 `;
 
 const Pagination = ({
@@ -99,7 +99,8 @@ const Pagination = ({
           <PageNumber
             key={no}
             onClick={() => handlePageChange(no)}
-            active={currentPage === no}>
+            $active={currentPage === no}
+          >
             {no}
           </PageNumber>
         ))}

@@ -17,6 +17,7 @@ const fadeInOut = keyframes`
 `;
 
 export const NotificationsContainer = styled.div`
+  position: relative;
   width: 100%;
 
   @media screen and (min-width: 90em) {
@@ -30,12 +31,6 @@ export const Table = styled.table`
   width: 87%;
   margin: auto;
   border-spacing: 0;
-
-  /* & > thead{
-    & > tr{
-      display: flex;
-    }
-  } */
 
   th,
   td {
@@ -185,6 +180,7 @@ export const FilterBox = styled.form`
         width: 2.6rem;
         height: 0.9rem;
         font-size: 0.27rem;
+
         border-radius: 0.2rem;
         padding-left: .125rem;
       }
@@ -282,4 +278,10 @@ export const PaginationBox = styled.div`
       }
     }
   }
+`;
+
+export const SpinnerContainer = styled.div`
+  height: 20vh;
+  margin-top: 10rem;
+  position: relative;
 `;
