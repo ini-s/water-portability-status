@@ -37,7 +37,7 @@ const Alert = ({
     setIsLoadingData(true);
 
     try {
-      const dt: any = await addLocation(queryLocation);
+      const dt = await addLocation(queryLocation);
       setRealTimeData([dt]);
     } catch (error) {
       console.log(error);
