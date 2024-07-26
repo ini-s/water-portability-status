@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { useEffect, useState } from "react";
 
-import Graph from "./graph.component";
-import Alert from "../alert/alert.component";
-import Spinner from "../spinner-component/spinner-component";
+import Graph from "../graph/graph.component";
 
 import {
   CategorySelectionButtons,
@@ -12,7 +10,7 @@ import {
   Title,
   SubTitle,
   GraphBody,
-  Softsensor,
+  SoftSensor,
 } from "../../styles/data-visualization.styles";
 
 import { IWaterData } from "../../types/data-types";
@@ -198,7 +196,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
         />
       </GraphBody>
 
-      <Softsensor>
+      <SoftSensor>
         {(isActiveProperty === "temperature" || isActiveProperty === "ph") && (
           <button onClick={handleSoftSensor}>
             {showSoftSensor[isActiveProperty as keyof ShowSoftSensorState]
@@ -206,7 +204,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
               : "view soft sensor"}
           </button>
         )}
-      </Softsensor>
+      </SoftSensor>
     </DataVisualizationContainer>
   );
 };
