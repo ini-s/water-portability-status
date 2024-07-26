@@ -17,7 +17,6 @@ import {
 import { GraphContainer } from "../../styles/graph.styles";
 
 import { IPredictionLogs, PropertyData } from "../../types/data-types";
-import { type } from "os";
 
 Chart.register(Filler);
 
@@ -41,8 +40,6 @@ const Graph = ({
   showSoftSensor,
   predictionLogs,
 }: GraphProps) => {
-  console.log(predictionLogs);
-  console.log(data.values);
 
   const predictionValues = predictionLogs.map((item) => {
     switch (propertyName) {
