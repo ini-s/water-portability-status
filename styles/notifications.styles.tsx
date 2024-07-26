@@ -194,20 +194,8 @@ export const FilterBox = styled.form`
     &::-webkit-datetime-edit {
       padding: 1em;
     }
-    &::-webkit-datetime-edit-fields-wrapper {
-    }
-    &::-webkit-datetime-edit-text {
-    }
-    &::-webkit-datetime-edit-month-field {
-    }
-    &::-webkit-datetime-edit-day-field {
-    }
-    &::-webkit-datetime-edit-year-field {
-    }
     &::-webkit-inner-spin-button {
       display: none;
-    }
-    &::-webkit-calendar-picker-indicator {
     }
   }
 `;
