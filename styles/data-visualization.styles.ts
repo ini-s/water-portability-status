@@ -153,18 +153,17 @@ export const Softsensor = styled.div`
     color: rgb(var(--color-dark-blue));
     margin-left: auto;
     cursor: pointer;
-    margin-top: -1.5rem;
 
     @media (max-width: 21.8125em) {
-      font-size: 0.3125rem;
+      font-size: 0.6rem;
     }
 
     @media (max-width: 30.5625em) and (min-width: 21.875em) {
-      font-size: 0.4375rem;
+      font-size: 0.7rem;
     }
 
     @media (max-width: 43.125em) and (min-width: 30.625em) {
-      font-size: 0.625rem;
+      font-size: 0.8rem;
     }
 
     &:hover {
