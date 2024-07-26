@@ -15,7 +15,10 @@ import { getLocationFromQuery } from "../server-store/queries/queries";
 import DataVisualization from "../components/data-visualization/data-visualization.component";
 import Alert from "../components/alert/alert.component";
 
-import { WaterPortabilityScreen } from "../styles/water-quality-data.styles";
+import {
+  FlexContainer,
+  WaterPortabilityScreen,
+} from "../styles/water-quality-data.styles";
 import NoDataComponent from "../components/no-data-component/no-data-component";
 import Spinner from "../components/spinner-component/spinner-component";
 
@@ -58,10 +61,10 @@ const LocationPage: NextPageWithLayout = () => {
           ) : (
             <DataVisualization waterData={waterQualityData} />
           )}
-          <div>
+          <FlexContainer>
             <Alert isSafe={isPortable} currentWaterData={waterData} />
             <WaterParameters waterQualityData={waterQualityData} />
-          </div>
+          </FlexContainer>
         </>
       ) : (
         <NoDataComponent />
