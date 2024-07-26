@@ -17,6 +17,7 @@ const fadeInOut = keyframes`
 `;
 
 export const NotificationsContainer = styled.div`
+  position: relative;
   width: 100%;
 
   @media screen and (min-width: 90em) {
@@ -30,12 +31,6 @@ export const Table = styled.table`
   width: 87%;
   margin: auto;
   border-spacing: 0;
-
-  /* & > thead{
-    & > tr{
-      display: flex;
-    }
-  } */
 
   th,
   td {
@@ -97,8 +92,6 @@ export const FilterButton = styled.div`
   flex-direction: column;
   margin: 0.3125rem 0;
 
-  
-
   & > button {
     background-color: rgb(var(--color-black));
     color: rgb(var(--color-white));
@@ -149,7 +142,7 @@ export const FilterBox = styled.form`
     display: flex;
     align-items: center;
     gap: 0.375rem;
-    @media (max-width: 28.125em){
+    @media (max-width: 28.125em) {
       gap: 0.1rem;
     }
     @media (max-width: 43.75em) and (min-width: 28.1875em) {
@@ -183,7 +176,7 @@ export const FilterBox = styled.form`
 
       @media (max-width: 28.125em) {
         width: 2rem;
-        height: .9rem;
+        height: 0.9rem;
         font-size: 0.4rem;
         border-radius: 0.2rem;
         padding: 0 0.1rem 0;
@@ -282,4 +275,10 @@ export const PaginationBox = styled.div`
       }
     }
   }
+`;
+
+export const SpinnerContainer = styled.div`
+  height: 20vh;
+  margin-top: 10rem;
+  position: relative;
 `;
