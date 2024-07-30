@@ -9,6 +9,8 @@ import {
 
 import { IWaterData } from "../../types/data-types";
 
+import SafeImage from "../../public/images/safe.png";
+import UnSafeImage from "../../public/images/unsafe.png";
 interface IWaterParameterProps {
   waterQualityData: IWaterData[];
 }
@@ -49,17 +51,19 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
                   <td>
                     {!data.prediction_log.potability ? (
                       <Image
-                        src="/images/unsafe.png"
+                        src={UnSafeImage}
                         alt="Unsafe-img"
                         width={20}
                         height={20}
+                        placeholder="blur"
                       />
                     ) : (
                       <Image
-                        src="/images/safe.png"
+                        src={SafeImage}
                         alt="Safe-img"
                         width={20}
                         height={20}
+                        placeholder="blur"
                       />
                     )}
                   </td>
