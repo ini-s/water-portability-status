@@ -70,6 +70,13 @@ export default class MyDocument extends Document {
 
           {/* Favicons */}
 
+          <link
+            rel="icon"
+            type="images/png"
+            sizes="32x32"
+            href="/favicons/favicon.png"
+          />
+
           <meta name="theme-color" content="#ffffff" />
         </Head>
         <body>
