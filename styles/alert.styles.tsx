@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const AlertContainer = styled.section`
   background-color: rgb(var(--color-yellow));
+  padding-bottom: 1rem;
 
   p {
     font-size: 0.6875rem;
@@ -13,7 +14,7 @@ export const AlertContainer = styled.section`
   }
 
   & > button {
-    margin-left: auto;
+    margin: 1rem 0.5rem 0 auto;
     display: block;
     font-size: 0.6875rem;
     font-weight: 800;
@@ -27,15 +28,15 @@ export const AlertContainer = styled.section`
   @media screen and (min-width: 47.9375em) {
     order: 2;
     margin-top: 2.9rem;
-
-    & > button {
-      margin-top: 2.4375rem;
-    }
   }
 
   @media screen and (min-width: 60.5625em) {
     p {
       font-size: 0.8rem;
+    }
+
+    & > button {
+      margin-top: 2.4375rem;
     }
   }
 
