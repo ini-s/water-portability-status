@@ -141,7 +141,7 @@ export const PropertySelectionButtons = styled.div`
 export const GraphBody = styled.div`
   display: flex;
 `;
-export const Softsensor = styled.div`
+export const SoftSensor = styled.div`
   width: 90%;
   margin: auto;
   & > button {

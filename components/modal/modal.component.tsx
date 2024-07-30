@@ -20,6 +20,7 @@ interface IModalComponentProps {
   onRequestClose: () => void;
   waterQualityData: IWaterData[];
   isLoading: boolean;
+  error: boolean;
 }
 
 const ModalComponent: React.FC<IModalComponentProps> = ({
@@ -27,6 +28,7 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
   onRequestClose,
   waterQualityData,
   isLoading,
+  error,
 }) => {
   const modalRef = useRef<HTMLDivElement>(null);
 
@@ -53,7 +55,6 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
     return null;
   }
 
- 
   return (
     <ModalOverlay>
       <ModalContainer ref={modalRef}>
@@ -61,6 +62,8 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
           <h2>DATA POTABILITY</h2>
           {isLoading ? (
             <Spinner />
+          ) : error ? (
+            <p>Cannot fetch data</p>
           ) : (
             <>
               {waterQualityData.map((data, index) => (

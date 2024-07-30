@@ -1,9 +1,7 @@
 /* eslint-disable react/jsx-no-undef */
 import { useEffect, useState } from "react";
 
-import Graph from "./graph.component";
-import Alert from "../alert/alert.component";
-import Spinner from "../spinner-component/spinner-component";
+import Graph from "../graph/graph.component";
 
 import {
   CategorySelectionButtons,
@@ -12,10 +10,10 @@ import {
   Title,
   SubTitle,
   GraphBody,
-  Softsensor,
   LabelContainer,
   ActualColor,
   PredictedColor,
+  SoftSensor,
 } from "../../styles/data-visualization.styles";
 
 import { IWaterData } from "../../types/data-types";
@@ -130,8 +128,12 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
     const isSoftSensorActive =
       showSoftSensor[isActiveProperty as keyof ShowSoftSensorState];
     if (isSoftSensorActive) {
-      setPropertyHeading(`${propertyDisplayNames[isActiveProperty]} Soft Sensor View`);
-      setSubHeading(`Actual vs Predicted ${propertyDisplayNames[isActiveProperty]} Values over Time`);
+      setPropertyHeading(
+        `${propertyDisplayNames[isActiveProperty]} Soft Sensor View`
+      );
+      setSubHeading(
+        `Actual vs Predicted ${propertyDisplayNames[isActiveProperty]} Values over Time`
+      );
     } else {
       setPropertyHeading(propertyDisplayNames[isActiveProperty]);
       setSubHeading(`${propertyDisplayNames[isActiveProperty]} Data over Time`);
@@ -170,18 +172,14 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
             <>
               <button
                 style={getButtonStyle(isActiveProperty === "temperature")}
-                onClick={() =>
-                  handlePropertyState("temperature")
-                }>
+                onClick={() => handlePropertyState("temperature")}>
                 Temperature
               </button>
               <button
                 style={getButtonStyle(
                   isActiveProperty === "total_dissolved_solids"
                 )}
-                onClick={() =>
-                  handlePropertyState("total_dissolved_solids")
-                }>
+                onClick={() => handlePropertyState("total_dissolved_solids")}>
                 Total Dissolved Solids
               </button>
               <button
@@ -193,16 +191,12 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
                 style={getButtonStyle(
                   isActiveProperty === "electrical_conductivity"
                 )}
-                onClick={() =>
-                  handlePropertyState("electrical_conductivity")
-                }>
+                onClick={() => handlePropertyState("electrical_conductivity")}>
                 Electrical Conductivity
               </button>
               <button
                 style={getButtonStyle(isActiveProperty === "specific_gravity")}
-                onClick={() =>
-                  handlePropertyState("specific_gravity")
-                }>
+                onClick={() => handlePropertyState("specific_gravity")}>
                 Specific Gravity
               </button>
             </>
@@ -229,7 +223,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
         />
       </GraphBody>
 
-      <Softsensor>
+      <SoftSensor>
         {(isActiveProperty === "temperature" || isActiveProperty === "ph") && (
           <button onClick={handleSoftSensor}>
             {showSoftSensor[isActiveProperty as keyof ShowSoftSensorState]
@@ -237,7 +231,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
               : "View Soft Sensor"}
           </button>
         )}
-      </Softsensor>
+      </SoftSensor>
     </DataVisualizationContainer>
   );
 };

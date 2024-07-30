@@ -12,6 +12,7 @@ import {
   Table,
   NotificationHeader,
   FilterButton,
+  SpinnerContainer,
 } from "../styles/notifications.styles";
 
 import Pagination from "../components/pagination/pagination";
@@ -50,14 +51,13 @@ const NotificationsPage: NextPageWithLayout = () => {
   });
   const [errorMessage, setErrorMessage] = useState("");
 
-  const { data, isInitialLoading, isFetching, isPreviousData } =
-    useGetNotifications({
-      page: currentPage,
-      location: queryLocation,
-      start_date: startDate,
-      end_date: endDate,
-      size,
-    });
+  const { data, isInitialLoading, isFetching } = useGetNotifications({
+    page: currentPage,
+    location: queryLocation,
+    start_date: startDate,
+    end_date: endDate,
+    size,
+  });
   const notifications: INotifications[] = data?.notifications;
 
   const handleDateChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -99,6 +99,7 @@ const NotificationsPage: NextPageWithLayout = () => {
 
     setDateRange({ startDate: "", endDate: "" });
   };
+
   useEffect(() => {
     if (errorMessage) {
       const timer = setTimeout(() => {
@@ -136,7 +137,8 @@ const NotificationsPage: NextPageWithLayout = () => {
             <FilterButton>
               <button
                 disabled={dateRange.startDate === ""}
-                onClick={filterByDateRange}>
+                onClick={filterByDateRange}
+              >
                 filter
               </button>
               <button type="button" onClick={clearFilters}>
@@ -148,40 +150,38 @@ const NotificationsPage: NextPageWithLayout = () => {
         </FilterBox>
       </NotificationHeader>
 
-      <Table>
-        <thead>
-          <tr>
-            <th>date & time</th>
-            <th>event description</th>
-          </tr>
-        </thead>
-        {isFetching || isInitialLoading ? (
-          <tbody>
+      {isFetching || isInitialLoading ? (
+        <SpinnerContainer>
+          <Spinner />
+        </SpinnerContainer>
+      ) : (
+        <Table>
+          <thead>
             <tr>
-              <td colSpan={2} style={{ textAlign: "center" }}>
-                <Spinner />
-              </td>
+              <th>date & time</th>
+              <th>event description</th>
             </tr>
-          </tbody>
-        ) : notifications?.length > 0 ? (
-          <tbody>
-            {notifications.map((el, index) => (
-              <tr key={index}>
-                <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
-                <td>{el.message}</td>
+          </thead>
+          {notifications?.length > 0 ? (
+            <tbody>
+              {notifications.map((el, index) => (
+                <tr key={index}>
+                  <td>{dayjs(el.created_at).format("MM/DD/YYYY HH:mm")}</td>
+                  <td>{el.message}</td>
+                </tr>
+              ))}
+            </tbody>
+          ) : (
+            <tbody>
+              <tr>
+                <td colSpan={2} style={{ textAlign: "center" }}>
+                  <NoDataComponent />
+                </td>
               </tr>
-            ))}
-          </tbody>
-        ) : (
-          <tbody>
-            <tr>
-              <td colSpan={2} style={{ textAlign: "center" }}>
-                <NoDataComponent />
-              </td>
-            </tr>
-          </tbody>
-        )}
-      </Table>
+            </tbody>
+          )}
+        </Table>
+      )}
       {notifications?.length > 0 && (
         <Pagination
           size={data?.total_count ?? 0}

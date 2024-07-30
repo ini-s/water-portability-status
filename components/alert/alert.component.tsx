@@ -2,12 +2,15 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import dayjs from "dayjs";
 
-import { AlertContainer } from "../../styles/alert.styles";
+import {
+  AlertContainer,
+  AlertHeading,
+  AlertText,
+} from "../../styles/alert.styles";
 
 import useAddLocation from "../../server-store/mutations/useAddLocation";
-
 import { getLocationFromQuery } from "../../server-store/queries/queries";
-import { IGetAllArgs } from "../../server-store/queries/useGetNotifications";
+
 import { IWaterData } from "../../types/data-types";
 
 import ModalComponent from "../modal/modal.component";
@@ -22,20 +25,27 @@ const Alert = ({
   const [realTimeData, setRealTimeData] = useState<IWaterData[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
+  const [error, setError] = useState(false);
+
   const router = useRouter();
   const { location } = router.query;
 
   const queryLocation = getLocationFromQuery(location);
 
-  const { mutateAsync: addLocation, isLoading, error } = useAddLocation();
+  const { mutateAsync: addLocation } = useAddLocation();
 
   const getRealTimeData = async () => {
     setIsModalOpen(true);
     setIsLoadingData(true);
 
     try {
-      const dt: any = await addLocation(queryLocation);
-      setRealTimeData([dt]);
+      const dt = await addLocation(queryLocation);
+      if (dt.status === "01") {
+        setError(true);
+      } else {
+        setError(false);
+        setRealTimeData([dt.data]);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -49,38 +59,41 @@ const Alert = ({
         Report at{" "}
         {dayjs(currentWaterData?.created_at).format("MM/DD/YYYY HH:mm")}
       </p>
-      <h1>ALERT</h1>
-      <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
-        {!isSafe ? (
-          <>
-            pH is not within acceptable range
-            <br />
-            Temperature is not within acceptable range
-            <br />
-            Specific Gravity is not within acceptable range
-            <br />
-            Total Dissolved Solids is not within acceptable range
-            <br />
-            Salinity is not within acceptable range
-            <br />
-            Electrical Conductivity is not within acceptable range
-          </>
-        ) : (
-          <>
-            pH is within acceptable range
-            <br />
-            Temperature is within acceptable range
-            <br />
-            Specific Gravity is within acceptable range
-            <br />
-            Total Dissolved Solids is within acceptable range
-            <br />
-            Salinity is within acceptable range
-            <br />
-            Electrical Conductivity is within acceptable range
-          </>
-        )}
-      </p>
+      <AlertText>
+        <AlertHeading>ALERT</AlertHeading>
+        <p style={{ color: isSafe ? "rgba(4, 155, 1, 1)" : "rgb(226, 3, 3)" }}>
+          {!isSafe ? (
+            <>
+              pH is not within acceptable range
+              <br />
+              Temperature is not within acceptable range
+              <br />
+              Specific Gravity is not within acceptable range
+              <br />
+              Total Dissolved Solids is not within acceptable range
+              <br />
+              Salinity is not within acceptable range
+              <br />
+              Electrical Conductivity is not within acceptable range
+            </>
+          ) : (
+            <>
+              pH is within acceptable range
+              <br />
+              Temperature is within acceptable range
+              <br />
+              Specific Gravity is within acceptable range
+              <br />
+              Total Dissolved Solids is within acceptable range
+              <br />
+              Salinity is within acceptable range
+              <br />
+              Electrical Conductivity is within acceptable range
+            </>
+          )}
+        </p>
+      </AlertText>
+
       <button disabled={!location} onClick={getRealTimeData}>
         Get Real-time Data
       </button>
@@ -89,6 +102,7 @@ const Alert = ({
         onRequestClose={() => setIsModalOpen(false)}
         waterQualityData={realTimeData}
         isLoading={isLoadingData}
+        error={error}
       />
     </AlertContainer>
   );

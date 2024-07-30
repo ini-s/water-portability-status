@@ -17,6 +17,7 @@ const fadeInOut = keyframes`
 `;
 
 export const NotificationsContainer = styled.div`
+  position: relative;
   width: 100%;
 
   @media screen and (min-width: 90em) {
@@ -30,12 +31,6 @@ export const Table = styled.table`
   width: 87%;
   margin: auto;
   border-spacing: 0;
-
-  /* & > thead{
-    & > tr{
-      display: flex;
-    }
-  } */
 
   th,
   td {
@@ -209,20 +204,8 @@ export const FilterBox = styled.form`
     &::-webkit-datetime-edit {
       padding: 1em;
     }
-    &::-webkit-datetime-edit-fields-wrapper {
-    }
-    &::-webkit-datetime-edit-text {
-    }
-    &::-webkit-datetime-edit-month-field {
-    }
-    &::-webkit-datetime-edit-day-field {
-    }
-    &::-webkit-datetime-edit-year-field {
-    }
     &::-webkit-inner-spin-button {
       display: none;
-    }
-    &::-webkit-calendar-picker-indicator {
     }
   }
 `;
@@ -290,4 +273,10 @@ export const PaginationBox = styled.div`
       }
     }
   }
+`;
+
+export const SpinnerContainer = styled.div`
+  height: 20vh;
+  margin-top: 10rem;
+  position: relative;
 `;
