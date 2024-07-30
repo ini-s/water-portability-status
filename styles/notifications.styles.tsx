@@ -97,7 +97,7 @@ export const NotificationHeader = styled.div`
 export const FilterButton = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 0.3125rem 0;
+  margin: 0.3125rem;
 
   & > button {
     background-color: rgb(var(--color-black));
@@ -169,7 +169,7 @@ export const FilterBox = styled.form`
       }
     }
 
-    & > input { 
+    & > input {
       border: 0.04rem solid rgb(var(--color-black));
       border-radius: 0.5rem;
       text-transform: uppercase;
@@ -180,13 +180,12 @@ export const FilterBox = styled.form`
       width: 4.8rem;
       cursor: pointer;
       padding-left: 0.3rem;
-
-      ::placeholder{
+      
+      ::placeholder {
         font-size: 1.875rem;
         color: rgb(var(--color-black));
       }
 
-      
       @media (max-width: 28.125em) {
         width: 2.6rem;
         height: 0.9rem;
