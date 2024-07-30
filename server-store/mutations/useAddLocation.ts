@@ -1,14 +1,21 @@
 import { IWaterData } from "../../types/data-types";
+
 import { api } from "../utils";
 
 import { useMutation } from "@tanstack/react-query";
 
 type AddLocationArg = string;
 
-const addLocation = async (data: AddLocationArg): Promise<IWaterData> => {
+interface ApiResponse {
+  status: string;
+  data: IWaterData;
+  message: string;
+}
+
+const addLocation = async (data: AddLocationArg): Promise<ApiResponse> => {
   const response = await api.post(`/water-quality-data?location=${data}`, data);
 
-  return response.data.data;
+  return response.data;
 };
 
 const useAddLocation = () => {

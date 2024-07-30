@@ -25,12 +25,14 @@ const Alert = ({
   const [realTimeData, setRealTimeData] = useState<IWaterData[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isLoadingData, setIsLoadingData] = useState(false);
+  const [error, setError] = useState(false);
+
   const router = useRouter();
   const { location } = router.query;
 
   const queryLocation = getLocationFromQuery(location);
 
-  const { mutateAsync: addLocation, isLoading, error } = useAddLocation();
+  const { mutateAsync: addLocation } = useAddLocation();
 
   const getRealTimeData = async () => {
     setIsModalOpen(true);
@@ -38,7 +40,12 @@ const Alert = ({
 
     try {
       const dt = await addLocation(queryLocation);
-      setRealTimeData([dt]);
+      if (dt.status === "01") {
+        setError(true);
+      } else {
+        setError(false);
+        setRealTimeData([dt.data]);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -95,6 +102,7 @@ const Alert = ({
         onRequestClose={() => setIsModalOpen(false)}
         waterQualityData={realTimeData}
         isLoading={isLoadingData}
+        error={error}
       />
     </AlertContainer>
   );
