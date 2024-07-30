@@ -5,15 +5,8 @@ export const SafeScreenContainer = styled.section`
   align-items: center;
   justify-content: center;
   padding: 0 2.5rem;
-  margin-block: 3.4rem;
+  margin-block: 3rem;
 
-  @media screen and (min-width: 47.9375em) {
-    margin-block: 4.2rem;
-  }
-
-  @media screen and (min-width: 47.9375em) {
-    margin-block: 6.25rem;
-  }
 `;
 
 export const ImageContainer = styled.div`
