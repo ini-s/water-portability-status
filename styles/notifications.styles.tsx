@@ -77,7 +77,7 @@ export const NotificationHeader = styled.div`
 
     @media (max-width: 28.125em) {
       padding-left: 0;
-      font-size: .8rem;
+      font-size: 0.8rem;
       letter-spacing: 0.1rem;
     }
 
@@ -169,7 +169,7 @@ export const FilterBox = styled.form`
       }
     }
 
-    & > input {
+    & > input { 
       border: 0.04rem solid rgb(var(--color-black));
       border-radius: 0.5rem;
       text-transform: uppercase;
@@ -181,12 +181,18 @@ export const FilterBox = styled.form`
       cursor: pointer;
       padding-left: 0.3rem;
 
+      ::placeholder{
+        font-size: 1.875rem;
+        color: rgb(var(--color-black));
+      }
+
+      
       @media (max-width: 28.125em) {
         width: 2.6rem;
         height: 0.9rem;
         font-size: 0.27rem;
         border-radius: 0.2rem;
-        padding-left: .125rem;
+        padding-left: 0.125rem;
       }
 
       @media (max-width: 43.75em) and (min-width: 28.1875em) {
@@ -197,7 +203,10 @@ export const FilterBox = styled.form`
         padding-left: 0.08rem;
       }
     }
-
+    &::-webkit-input-placeholder {
+      color: rgb(var(--color-black));
+      opacity: 1;
+    }
     &::-webkit-datetime-edit {
       padding: 1em;
     }
