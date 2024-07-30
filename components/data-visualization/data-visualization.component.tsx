@@ -13,6 +13,9 @@ import {
   SubTitle,
   GraphBody,
   Softsensor,
+  LabelContainer,
+  ActualColor,
+  PredictedColor,
 } from "../../styles/data-visualization.styles";
 
 import { IWaterData } from "../../types/data-types";
@@ -39,15 +42,26 @@ const propertyDataDefaultValues = {
   step: 1,
 };
 
+const propertyDisplayNames: { [key: string]: string } = {
+  temperature: "Temperature",
+  total_dissolved_solids: "Total Dissolved Solids",
+  salinity: "Salinity",
+  electrical_conductivity: "Electrical Conductivity",
+  specific_gravity: "Specific Gravity",
+  ph: "pH",
+};
+
 const DataVisualization = ({ waterData }: DataVisualizationProps) => {
   const [isActive, setIsActive] = useState("physical");
   const [isActiveProperty, setIsActiveProperty] = useState("temperature");
+  const [subHeading, setSubHeading] = useState("Temperature Levels over Time");
   const [propertyHeading, setPropertyHeading] = useState("Temperature");
   const [showSoftSensor, setShowSoftSensor] = useState<ShowSoftSensorState>({
     temperature: false,
     ph: false,
   });
   const [isLoading, setIsLoading] = useState(true);
+
   const handleActiveState = (state: string) => {
     setIsActive(state);
     if (state === "chemical") {
@@ -59,9 +73,10 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
     }
   };
 
-  const handlePropertyState = (state: string, heading: string) => {
-    setIsActiveProperty(state);
-    setPropertyHeading(heading);
+  const handlePropertyState = (propertyKey: string) => {
+    setIsActiveProperty(propertyKey);
+    setPropertyHeading(propertyDisplayNames[propertyKey]);
+    setSubHeading(`${propertyDisplayNames[propertyKey]} Data over Time`);
   };
 
   const getButtonStyle = (isActive: boolean) => {
@@ -111,6 +126,18 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
     }
   }, [isActive]);
 
+  useEffect(() => {
+    const isSoftSensorActive =
+      showSoftSensor[isActiveProperty as keyof ShowSoftSensorState];
+    if (isSoftSensorActive) {
+      setPropertyHeading(`${propertyDisplayNames[isActiveProperty]} Soft Sensor View`);
+      setSubHeading(`Actual vs Predicted ${propertyDisplayNames[isActiveProperty]} Values over Time`);
+    } else {
+      setPropertyHeading(propertyDisplayNames[isActiveProperty]);
+      setSubHeading(`${propertyDisplayNames[isActiveProperty]} Data over Time`);
+    }
+  }, [isActiveProperty, showSoftSensor]);
+
   return (
     <DataVisualizationContainer>
       <CategorySelectionButtons>
@@ -126,7 +153,17 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
         </button>
       </CategorySelectionButtons>
       <Title>{propertyHeading}</Title>
-      <SubTitle>{propertyHeading} Levels over Time</SubTitle>
+
+      <SubTitle>{subHeading}</SubTitle>
+      {showSoftSensor[isActiveProperty as keyof ShowSoftSensorState] && (
+        <LabelContainer>
+          <ActualColor></ActualColor>
+          <span>Actual {propertyDisplayNames[isActiveProperty]}</span>
+          <PredictedColor></PredictedColor>
+          <span>Predicted {propertyDisplayNames[isActiveProperty]}</span>
+        </LabelContainer>
+      )}
+
       <GraphBody>
         <PropertySelectionButtons style={getDivStyle()}>
           {isActive === "physical" && (
@@ -134,7 +171,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
               <button
                 style={getButtonStyle(isActiveProperty === "temperature")}
                 onClick={() =>
-                  handlePropertyState("temperature", "temperature")
+                  handlePropertyState("temperature")
                 }>
                 Temperature
               </button>
@@ -143,16 +180,13 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
                   isActiveProperty === "total_dissolved_solids"
                 )}
                 onClick={() =>
-                  handlePropertyState(
-                    "total_dissolved_solids",
-                    "total dissolved solids"
-                  )
+                  handlePropertyState("total_dissolved_solids")
                 }>
-                Total Dissolved
+                Total Dissolved Solids
               </button>
               <button
                 style={getButtonStyle(isActiveProperty === "salinity")}
-                onClick={() => handlePropertyState("salinity", "salinity")}>
+                onClick={() => handlePropertyState("salinity")}>
                 Salinity
               </button>
               <button
@@ -160,17 +194,14 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
                   isActiveProperty === "electrical_conductivity"
                 )}
                 onClick={() =>
-                  handlePropertyState(
-                    "electrical_conductivity",
-                    "electrical conductivity"
-                  )
+                  handlePropertyState("electrical_conductivity")
                 }>
                 Electrical Conductivity
               </button>
               <button
                 style={getButtonStyle(isActiveProperty === "specific_gravity")}
                 onClick={() =>
-                  handlePropertyState("specific_gravity", "specific gravity")
+                  handlePropertyState("specific_gravity")
                 }>
                 Specific Gravity
               </button>
@@ -180,7 +211,7 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
             <>
               <button
                 style={getButtonStyle(isActiveProperty === "ph")}
-                onClick={() => handlePropertyState("ph", "PH")}>
+                onClick={() => handlePropertyState("ph")}>
                 pH
               </button>
             </>
@@ -202,8 +233,8 @@ const DataVisualization = ({ waterData }: DataVisualizationProps) => {
         {(isActiveProperty === "temperature" || isActiveProperty === "ph") && (
           <button onClick={handleSoftSensor}>
             {showSoftSensor[isActiveProperty as keyof ShowSoftSensorState]
-              ? "exit soft sensor view"
-              : "view soft sensor"}
+              ? "Exit Soft Sensor View"
+              : "View Soft Sensor"}
           </button>
         )}
       </Softsensor>
