@@ -175,7 +175,7 @@ export const FilterBox = styled.form`
       width: 4.8rem;
       cursor: pointer;
       padding-left: 0.3rem;
-      
+
       ::placeholder {
         font-size: 1.875rem;
         color: rgb(var(--color-black));
