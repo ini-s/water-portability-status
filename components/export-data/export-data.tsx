@@ -2,7 +2,12 @@ import React, { ChangeEvent, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
-import { Button, DateRangeBox } from "../../styles/header.styles";
+import {
+  Button,
+  DateRangeBox,
+  ErrorMessage,
+  SelectRange,
+} from "../../styles/header.styles";
 
 import useGetExportData from "../../server-store/queries/useGetExportData";
 import { getLocationFromQuery } from "../../server-store/queries/queries";
@@ -21,6 +26,7 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
   });
   const [errorMessage, setErrorMessage] = useState("");
   const [isDataReady, setIsDataReady] = useState(false);
+  const [exportButtonClicked, setExportButtonClicked] = useState(false); // Track export button click
 
   const router = useRouter();
   const { query } = router;
@@ -97,21 +103,32 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
     setDateRange({ startDate: "", endDate: "" });
     setErrorMessage("");
     setShowDateRange(false);
+    setExportButtonClicked(false);
   };
 
   return (
     <>
-      <Button onClick={() => setShowDateRange(true)}>export data</Button>
+      <Button
+        style={{
+          opacity: exportButtonClicked ? 0.3 : 1,
+        }}
+        onClick={() => {
+          setShowDateRange(true);
+          setExportButtonClicked(true);
+        }}>
+        export data
+      </Button>
 
       {showDateRange && (
         <DateRangeBox>
-          <p>Select Date Range</p>
+          <SelectRange>Select Date Range</SelectRange>
           <input
             type="date"
             id="startDate"
             name="startDate"
             onChange={handleDateChange}
             value={dateRange.startDate}
+            placeholder="MM/DD/YYYY"
           />
 
           <input
@@ -120,20 +137,20 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
             name="endDate"
             onChange={handleDateChange}
             value={dateRange.endDate}
+            placeholder="MM/DD/YYYY"
           />
 
           <button
             disabled={
               !dateRange.startDate || !dateRange.endDate || !isDataReady
             }
-            onClick={handleDownload}
-          >
+            onClick={handleDownload}>
             {isFetching || isInitialLoading
               ? "Loading data for download"
               : "download"}
           </button>
 
-          {errorMessage && <p>{errorMessage}</p>}
+          {errorMessage && <ErrorMessage>{errorMessage}</ErrorMessage>}
         </DateRangeBox>
       )}
     </>

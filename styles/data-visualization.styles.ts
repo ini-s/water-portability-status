@@ -10,7 +10,7 @@ export const CategorySelectionButtons = styled.div`
   padding: 0.9375rem 0 0 12.5rem;
 
   @media (max-width: 25em) {
-    padding: 1.5rem 0 0 4.6rem;
+    padding: 1.5rem 0 0 2.5rem;
   }
 
   @media (max-width: 37.5625em) and (min-width: 25.0625em) {
@@ -18,13 +18,12 @@ export const CategorySelectionButtons = styled.div`
   }
 
   @media (max-width: 62.5em) and (min-width: 25em) {
-    padding: 1.5rem 0 0 6rem;
+    padding: 1.5rem 0 0 4.8rem;
   }
 
   & > button {
     width: 9.3225rem;
     height: 3.9444rem;
-    background-color: #a9faff;
     border: none;
     font-weight: 700;
     font-size: 1.5537rem;
@@ -59,16 +58,14 @@ export const Title = styled.h1`
 
   @media (max-width: 25em) {
     font-size: 0.5rem;
-    padding-left: 5rem;
+    padding-left: 3rem;
     margin: 0.5rem 0 0.2rem;
-    
   }
 
   @media (max-width: 62.5em) and (min-width: 25.0625em) {
     font-size: 0.7rem;
-    padding-left: 7rem;
+    padding-left: 5.25rem;
     margin: 0.7rem 0 0.4rem;
-    
   }
 `;
 export const SubTitle = styled.p`
@@ -79,11 +76,11 @@ export const SubTitle = styled.p`
 
   @media (max-width: 25em) {
     font-size: 0.5rem;
-    padding-left: 0.5625rem;
+    padding-left: 2rem;
   }
   @media (max-width: 62.5em) and (min-width: 25.0625em) {
     font-size: 0.7rem;
-    padding-left: 1.5rem;
+    padding-left: 6rem;
   }
 `;
 
@@ -103,12 +100,12 @@ export const PropertySelectionButtons = styled.div`
   }
 
   @media (max-width: 37.5em) and (min-width: 25.0625em) {
-    width: 3.5rem;
-    height: 12rem;
+    width: 4rem;
+    height: 13rem;
   }
   @media (max-width: 62.5em) and (min-width: 37.5625em) {
     width: 4.1rem;
-    height: 14rem;
+    height: 14rem;  
   }
 
   & > button {
@@ -125,9 +122,9 @@ export const PropertySelectionButtons = styled.div`
       font-size: 0.2975rem;
     }
     @media (max-width: 37.5em) and (min-width: 25.0625em) {
-      height: 2rem;
-      width: 3.5rem;
-      font-size: 0.49rem;
+      height: 2.3rem;
+      width: 4rem;
+      font-size: 0.51rem;
     }
     @media (max-width: 62.5em) and (min-width: 37.5625em) {
       height: 2.5rem;
@@ -153,23 +150,75 @@ export const SoftSensor = styled.div`
     color: rgb(var(--color-dark-blue));
     margin-left: auto;
     cursor: pointer;
-    margin-top: -1.5rem;
-
-    @media (max-width: 21.8125em) {
-      font-size: 0.3125rem;
-    }
-
-    @media (max-width: 30.5625em) and (min-width: 21.875em) {
-      font-size: 0.4375rem;
-    }
-
-    @media (max-width: 43.125em) and (min-width: 30.625em) {
-      font-size: 0.625rem;
-    }
+    font-size: 0.7rem;
 
     &:hover {
       text-decoration: underline;
       opacity: 0.8;
     }
+  }
+`;
+export const LabelContainer = styled.div`
+  display: flex;
+  align-items: center;
+  margin: 0.4rem 0 0.1rem auto;
+  width: 80%;
+
+  @media (max-width: 25em) {
+    margin: 0.3125rem 0 0.1875rem auto;
+    width: 70%;
+  }
+  @media (max-width: 62.5em) and (min-width: 25.0625em) {
+    width: 65%;
+  }
+
+  & > span {
+    margin-right: 0.7rem;
+    font-size: 0.8rem;
+
+    @media (max-width: 25em) {
+      font-size: 0.4rem;
+    }
+    @media (max-width: 62.5em) and (min-width: 25.0625em) {
+      font-size: 0.5rem;
+    }
+  }
+`;
+
+export const ActualColor = styled.div`
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: rgba(0, 153, 255, 0.5);
+  margin-right: 0.3125rem;
+  border-radius: 50%;
+
+  @media (max-width: 25em) {
+    width: 0.3rem;
+    height: 0.3rem;
+    margin-right: 0.2rem;
+  }
+  @media (max-width: 62.5em) and (min-width: 25.0625em) {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.2rem;
+  }
+`;
+
+export const PredictedColor = styled.div`
+  width: 0.625rem;
+  height: 0.625rem;
+  background-color: rgb(var(--color-red));
+  margin-right: 0.3125rem;
+  border-radius: 50%;
+
+  @media (max-width: 25em) {
+    width: 0.3rem;
+    height: 0.3rem;
+    margin-right: 0.2rem;
+  }
+  @media (max-width: 62.5em) and (min-width: 25.0625em) {
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.2rem;
   }
 `;

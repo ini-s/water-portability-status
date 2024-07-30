@@ -118,6 +118,7 @@ const NotificationsPage: NextPageWithLayout = () => {
           <div>
             <p>Filter by Date Range</p>
             <input
+              placeholder="MM/DD/YYYY"
               type="date"
               id="startDate"
               name="startDate"
@@ -126,6 +127,7 @@ const NotificationsPage: NextPageWithLayout = () => {
             />
             <p>-</p>
             <input
+              placeholder="MM/DD/YYYY"
               type="date"
               id="endDate"
               name="endDate"
