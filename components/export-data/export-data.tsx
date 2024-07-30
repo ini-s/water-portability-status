@@ -103,20 +103,19 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
     setDateRange({ startDate: "", endDate: "" });
     setErrorMessage("");
     setShowDateRange(false);
-    setExportButtonClicked(false); 
+    setExportButtonClicked(false);
   };
 
   return (
     <>
       <Button
         style={{
-          opacity: exportButtonClicked ? 0.3 : 1, 
+          opacity: exportButtonClicked ? 0.3 : 1,
         }}
         onClick={() => {
           setShowDateRange(true);
-          setExportButtonClicked(true); 
-        }}
-      >
+          setExportButtonClicked(true);
+        }}>
         export data
       </Button>
 
@@ -145,8 +144,7 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
             disabled={
               !dateRange.startDate || !dateRange.endDate || !isDataReady
             }
-            onClick={handleDownload}
-          >
+            onClick={handleDownload}>
             {isFetching || isInitialLoading
               ? "Loading data for download"
               : "download"}
