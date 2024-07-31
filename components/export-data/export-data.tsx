@@ -1,4 +1,4 @@
-import React, { ChangeEvent, useEffect, useState } from "react";
+import React, { ChangeEvent, useEffect, useRef, useState } from "react";
 import { useRouter } from "next/router";
 import dayjs from "dayjs";
 
@@ -27,6 +27,8 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [isDataReady, setIsDataReady] = useState(false);
   const [exportButtonClicked, setExportButtonClicked] = useState(false); // Track export button click
+
+  const dropdownRef = useRef<HTMLDivElement>(null);
 
   const router = useRouter();
   const { query } = router;
@@ -73,6 +75,23 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
     }
   }, [data, isFetching]);
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !dropdownRef.current.contains(event.target as Node)
+      ) {
+        setShowDateRange(false);
+        setExportButtonClicked(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [dropdownRef]);
+
   const handleDownload = () => {
     if (dayjs(dateRange.startDate).isAfter(dayjs(dateRange.endDate))) {
       setErrorMessage("Start date cannot be after end date.");
@@ -105,6 +124,8 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
     setShowDateRange(false);
     setExportButtonClicked(false);
   };
+  const isDownloadDisabled =
+    !dateRange.startDate || !dateRange.endDate || !isDataReady;
 
   return (
     <>
@@ -120,7 +141,7 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
       </Button>
 
       {showDateRange && (
-        <DateRangeBox>
+        <DateRangeBox ref={dropdownRef}>
           <SelectRange>Select Date Range</SelectRange>
           <input
             type="date"
@@ -141,9 +162,10 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
           />
 
           <button
-            disabled={
-              !dateRange.startDate || !dateRange.endDate || !isDataReady
-            }
+            style={{
+              opacity: isDownloadDisabled ? 0.3 : 1,
+            }}
+            disabled={isDownloadDisabled}
             onClick={handleDownload}>
             {isFetching || isInitialLoading
               ? "Loading data for download"
