@@ -196,16 +196,7 @@ export const FilterBox = styled.form`
         border-radius: 0.25rem;
         padding-left: 0.08rem;
       }
-    }
-    &::-webkit-input-placeholder {
-      color: rgb(var(--color-black));
-      opacity: 1;
-    }
-    &::-webkit-datetime-edit {
-      padding: 1em;
-    }
-    &::-webkit-inner-spin-button {
-      display: none;
+
     }
   }
 `;
