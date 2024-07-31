@@ -55,7 +55,6 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
                         alt="Unsafe-img"
                         width={20}
                         height={20}
-                        placeholder="blur"
                       />
                     ) : (
                       <Image
@@ -63,7 +62,6 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
                         alt="Safe-img"
                         width={20}
                         height={20}
-                        placeholder="blur"
                       />
                     )}
                   </td>
