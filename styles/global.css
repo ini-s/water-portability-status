@@ -29,20 +29,16 @@ h6 {
 
 a {
   text-decoration: none;
+  color: rgb(var(--color-black));
 }
 
 li {
   list-style: none;
 }
 
-/* h1 {
-}
-
-h2 {
-
-} */
-
 button,
 a {
   cursor: pointer;
+  text-decoration: none;
+  color: rgb(var(--color-black));
 }

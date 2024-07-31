@@ -1,17 +1,14 @@
 import Document, {
-  DocumentContext,
   Html,
   Head,
   Main,
   NextScript,
-  DocumentInitialProps,
+  DocumentContext,
 } from "next/document";
 import { ServerStyleSheet } from "styled-components";
 
 export default class MyDocument extends Document {
-  static async getInitialProps(
-    ctx: DocumentContext
-  ): Promise<DocumentInitialProps> {
+  static async getInitialProps(ctx: DocumentContext) {
     const sheet = new ServerStyleSheet();
     const originalRenderPage = ctx.renderPage;
 
@@ -23,7 +20,6 @@ export default class MyDocument extends Document {
         });
 
       const initialProps = await Document.getInitialProps(ctx);
-
       return {
         ...initialProps,
         styles: (
@@ -38,7 +34,7 @@ export default class MyDocument extends Document {
     }
   }
 
-  render(): JSX.Element {
+  render() {
     return (
       <Html lang="en">
         <Head>
@@ -50,21 +46,41 @@ export default class MyDocument extends Document {
           <link
             rel="preconnect"
             href="https://fonts.gstatic.com"
+            as="font"
             crossOrigin=""
           />
           <link
             href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap"
             rel="stylesheet"
+            as="font"
+            crossOrigin=""
+          />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link
+            rel="preconnect"
+            href="https://fonts.gstatic.com"
+            as="font"
+            crossOrigin=""
+          />
+          <link
+            href="https://fonts.googleapis.com/css2?family=Karantina:wght@300;400;700&display=swap"
+            rel="stylesheet"
+            as="font"
           />
 
           {/* Favicons */}
 
+          <link
+            rel="icon"
+            type="images/png"
+            sizes="32x32"
+            href="/favicons/favicon.png"
+          />
+
           <meta name="theme-color" content="#ffffff" />
         </Head>
-
         <body>
           <Main />
-
           <NextScript />
         </body>
       </Html>
