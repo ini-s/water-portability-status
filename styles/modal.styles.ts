@@ -22,7 +22,7 @@ export const ModalContainer = styled.div`
   box-shadow: 0 0.125rem 0.625rem rgba(0, 0, 0, 0.1);
   text-align: center;
 
-  @media (max-width: 22.6875em){
+  @media (max-width: 22.6875em) {
     width: 16.875rem;
     height: 12.5rem;
     border-radius: 1.5rem;
@@ -47,8 +47,8 @@ export const ModalContent = styled.div`
     margin-bottom: 0.625rem;
     font-weight: 700;
 
-    @media (max-width: 22.6875em){
-      font-size: .9rem;
+    @media (max-width: 22.6875em) {
+      font-size: 0.9rem;
       margin-bottom: 0.28rem;
     }
 
@@ -58,22 +58,21 @@ export const ModalContent = styled.div`
     }
   }
 
-  & > button {
+  /* & > button {
     background-color: rgb(var(--color-dark-blue));
     border: none;
     border-radius: 0.8rem;
     margin: auto;
     font-size: 0.8962rem;
     font-weight: 800;
-    padding: .25rem .5rem;
+    padding: 0.25rem 0.5rem;
     color: rgb(var(--color-white));
 
-    
-    @media (max-width: 35.5625em){
-      padding: .125rem .375rem;
-      font-size: .5625rem;
+    @media (max-width: 35.5625em) {
+      padding: 0.125rem 0.375rem;
+      font-size: 0.5625rem;
     }
-  }
+  } */
 `;
 
 export const DataRow = styled.div`
@@ -81,8 +80,8 @@ export const DataRow = styled.div`
   flex-direction: column;
   width: 85%;
   margin-bottom: 1.25rem;
- 
-  @media (max-width: 35.5625em){
+
+  @media (max-width: 35.5625em) {
     width: 100%;
     margin-bottom: 0.1rem;
   }
@@ -97,10 +96,10 @@ export const DataItem = styled.div`
   width: 100%;
   margin-bottom: 0.375rem;
 
-  @media (max-width: 22.6875em){
-    margin-bottom: .4rem;
+  @media (max-width: 22.6875em) {
+    margin-bottom: 0.4rem;
   }
-  @media (max-width: 35.5625em) and (min-width: 22.75em){
+  @media (max-width: 35.5625em) and (min-width: 22.75em) {
     margin-bottom: 0.36rem;
   }
 `;
@@ -108,12 +107,12 @@ export const DataItem = styled.div`
 export const Label = styled.div`
   font-size: 1rem;
   font-weight: 500;
-  
-  @media (max-width: 22.6875em){
-    font-size: .625rem;
+
+  @media (max-width: 22.6875em) {
+    font-size: 0.625rem;
   }
   @media (max-width: 35.5625em) and (min-width: 22.75em) {
-    font-size: .6819rem;
+    font-size: 0.6819rem;
   }
 `;
 
@@ -127,16 +126,57 @@ export const Value = styled.div`
   font-size: 1rem;
   font-weight: 500;
 
-  @media (max-width: 22.6875em){
-    font-size: .625rem;
-    width : 5.0625rem;
-    height : .9375rem;
+  @media (max-width: 22.6875em) {
+    font-size: 0.625rem;
+    width: 5.0625rem;
+    height: 0.9375rem;
   }
-  @media (max-width: 35.5625em) and (min-width: 22.75em){
-    font-size: .6819rem;
+  @media (max-width: 35.5625em) and (min-width: 22.75em) {
+    font-size: 0.6819rem;
     width: 5.1144rem;
-    height: .98rem;
+    height: 0.98rem;
   }
 `;
 
-export const CloseButton = styled.button``;
+export const CloseButton = styled.button`
+  background-color: rgb(var(--color-dark-blue));
+  border: none;
+  border-radius: 0.8rem;
+  margin: auto;
+  font-size: 0.8962rem;
+  font-weight: 800;
+  padding: 0.25rem 0.5rem;
+  color: rgb(var(--color-white));
+
+  @media (max-width: 35.5625em) {
+    padding: 0.125rem 0.375rem;
+    font-size: 0.5625rem;
+  }
+`;
+
+export const NoData = styled.div`
+  width: 18rem;
+  height: 16rem;
+  background-color: rgb(var(--color-light-grey));
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: 35.5625em) {
+    width: 12rem;
+    height: 10rem;
+  }
+  & > p {
+    font-size: 2.5rem;
+    padding: 3rem 1rem;
+    font-weight: 700;
+    text-transform: capitalize;
+
+    @media (max-width: 35.5625em) {
+      font-size: 1.7rem;
+      padding: 1.9rem 1rem;
+    }
+  }
+`;
