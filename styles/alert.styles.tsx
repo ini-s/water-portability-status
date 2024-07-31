@@ -4,7 +4,7 @@ export const AlertContainer = styled.section`
   background-color: rgb(var(--color-yellow));
   padding-bottom: 1rem;
   margin-top: 2.9rem;
-  
+
   p {
     font-size: 0.6875rem;
   }
@@ -60,5 +60,17 @@ export const AlertHeading = styled.p`
 
   @media screen and (min-width: 75em) {
     margin-top: 1.125rem;
+  }
+`;
+
+export const SafeBox = styled.div`
+  p {
+    color: rgb(var(--color-green));
+  }
+`;
+
+export const UnSafeBox = styled.div`
+  p {
+    color: rgb(var(--color-red));
   }
 `;
