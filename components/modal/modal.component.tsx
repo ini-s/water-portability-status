@@ -14,6 +14,7 @@ import {
 } from "../../styles/modal.styles";
 
 import Spinner from "../spinner-component/spinner-component";
+import NoDataComponent from "../no-data-component/no-data-component";
 
 interface IModalComponentProps {
   isOpen: boolean;
@@ -63,26 +64,26 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
           {isLoading ? (
             <Spinner />
           ) : error ? (
-            <p>Cannot fetch data</p>
+            <NoDataComponent />
           ) : (
             <>
               {waterQualityData.map((data, index) => (
                 <DataRow key={index}>
                   <DataItem>
                     <Label>TEMPERATURE</Label>
-                    <Value>{data.temperature}</Value>
+                    <Value>{data.temperature} &deg;C</Value>
                   </DataItem>
                   <DataItem>
                     <Label>TOTAL DISSOLVED SOLIDS</Label>
-                    <Value>{data.total_dissolved_solids}</Value>
+                    <Value>{data.total_dissolved_solids} ppm</Value>
                   </DataItem>
                   <DataItem>
                     <Label>SALINITY</Label>
-                    <Value>{data.salinity}</Value>
+                    <Value>{data.salinity} ppm</Value>
                   </DataItem>
                   <DataItem>
-                    <Label>EC</Label>
-                    <Value>{data.electrical_conductivity}</Value>
+                    <Label>EC</Label> 
+                    <Value>{data.electrical_conductivity} uS/cm</Value>
                   </DataItem>
                   <DataItem>
                     <Label>SG</Label>
@@ -90,7 +91,7 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
                   </DataItem>
                   <DataItem>
                     <Label>pH</Label>
-                    <Value>{data.ph}</Value>
+                    <Value>{data.ph} pH</Value>
                   </DataItem>
                 </DataRow>
               ))}
