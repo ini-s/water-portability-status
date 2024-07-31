@@ -144,12 +144,13 @@ export const GraphBody = styled.div`
 export const SoftSensor = styled.div`
   width: 90%;
   margin: auto;
+  cursor: pointer;
+  
   & > button {
     border: none;
     background-color: rgb(var(--color-white));
     color: rgb(var(--color-dark-blue));
     margin-left: auto;
-    cursor: pointer;
     font-size: 0.7rem;
 
     &:hover {
