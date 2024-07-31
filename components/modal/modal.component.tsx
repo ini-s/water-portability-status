@@ -11,6 +11,7 @@ import {
   DataItem,
   Label,
   Value,
+  NoData,
 } from "../../styles/modal.styles";
 
 import Spinner from "../spinner-component/spinner-component";
@@ -60,13 +61,19 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
     <ModalOverlay>
       <ModalContainer ref={modalRef}>
         <ModalContent>
-          <h2>DATA POTABILITY</h2>
           {isLoading ? (
-            <Spinner />
+            <>
+              <h2>DATA POTABILITY</h2>
+              <Spinner />
+            </>
           ) : error ? (
-            <NoDataComponent />
+            <NoData>
+              <p>Cannot fetch data</p>
+              <CloseButton onClick={onRequestClose}>OK</CloseButton>
+            </NoData>
           ) : (
             <>
+              <h2>DATA POTABILITY</h2>
               {waterQualityData.map((data, index) => (
                 <DataRow key={index}>
                   <DataItem>
@@ -82,7 +89,7 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
                     <Value>{data.salinity} ppm</Value>
                   </DataItem>
                   <DataItem>
-                    <Label>EC</Label> 
+                    <Label>EC</Label>
                     <Value>{data.electrical_conductivity} uS/cm</Value>
                   </DataItem>
                   <DataItem>
