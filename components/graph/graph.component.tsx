@@ -99,21 +99,30 @@ const Graph = ({
                 display: true,
                 text: data.xLabel,
                 font: {
-                  size: 12,
+                  size: 9,
                 },
               },
+              ticks: {
+                stepSize: 1,
+                font: {
+                  size: 8,
+                }
+              }
             },
             y: {
               title: {
                 display: true,
                 text: data.yLabel,
                 font: {
-                  size: 12,
+                  size: 9,
                 },
               },
 
               ticks: {
                 stepSize: 1,
+                font: {
+                  size: 8,
+                }
               },
               min: data.min,
               max: data.max,
