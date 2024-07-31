@@ -3,7 +3,8 @@ import styled from "styled-components";
 export const AlertContainer = styled.section`
   background-color: rgb(var(--color-yellow));
   padding-bottom: 1rem;
-
+  margin-top: 2.9rem;
+  
   p {
     font-size: 0.6875rem;
   }
@@ -27,7 +28,6 @@ export const AlertContainer = styled.section`
 
   @media screen and (min-width: 47.9375em) {
     order: 2;
-    margin-top: 2.9rem;
   }
 
   @media screen and (min-width: 60.5625em) {
