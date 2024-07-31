@@ -52,6 +52,8 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
     data &&
     data?.map((data: IWaterData) => {
       const {
+        salinity,
+        temperature,
         prediction_log,
         electrical_conductivity,
         specific_gravity,
@@ -60,11 +62,13 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
       } = data;
       return {
         ...items,
-        ec: electrical_conductivity,
+        "salinity (ppm)": salinity,
+        "temperature (°C)": temperature,
+        "ec (µS/cm)": electrical_conductivity,
         sg: specific_gravity,
-        tds: total_dissolved_solids,
+        "tds (ppm)": total_dissolved_solids,
         pred_pH: prediction_log?.ph,
-        pred_temp: prediction_log?.temperature,
+        "pred_temp (°C)": prediction_log?.temperature,
         potability: prediction_log?.potability,
       };
     });
@@ -136,7 +140,8 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
         onClick={() => {
           setShowDateRange(true);
           setExportButtonClicked(true);
-        }}>
+        }}
+      >
         export data
       </Button>
 
@@ -166,7 +171,8 @@ const ExportData: React.FC<IExportData> = ({ fileName }) => {
               opacity: isDownloadDisabled ? 0.3 : 1,
             }}
             disabled={isDownloadDisabled}
-            onClick={handleDownload}>
+            onClick={handleDownload}
+          >
             {isFetching || isInitialLoading
               ? "Loading data for download"
               : "download"}
