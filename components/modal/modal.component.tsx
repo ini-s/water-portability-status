@@ -72,7 +72,7 @@ const ModalComponent: React.FC<IModalComponentProps> = ({
               <CloseButton onClick={onRequestClose}>OK</CloseButton>
             </NoData>
           ) : (
-            <>
+            <> 
               <h2>DATA POTABILITY</h2>
               {waterQualityData.map((data, index) => (
                 <DataRow key={index}>
