@@ -95,7 +95,7 @@ const Alert = ({
       </AlertText>
 
       <button disabled={!location} onClick={getRealTimeData}>
-        Get Real-time Data
+        Get Instant Real-time Data
       </button>
       <ModalComponent
         isOpen={isModalOpen}
