@@ -32,6 +32,8 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
               <th>EC (uS/cm)</th>
               <th>SG</th>
               <th>pH</th>
+              <th>PREDICTED pH</th>
+              <th>PREDICTED TEMP (°C)</th>
               <th>STATUS</th>
             </tr>
           </thead>
@@ -48,6 +50,8 @@ const WaterParameters: React.FC<IWaterParameterProps> = ({
                   <td>{data.electrical_conductivity}</td>
                   <td>{data.specific_gravity}</td>
                   <td>{data.ph}</td>
+                  <td>{data.prediction_log.ph}</td>
+                  <td>{data.prediction_log.temperature}</td>
                   <td>
                     {!data.prediction_log.potability ? (
                       <Image
